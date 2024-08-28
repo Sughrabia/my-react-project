@@ -15,8 +15,8 @@ const Navbar = () => {
         <p>GlamGrab</p>
       </div>
         <ul className='nav-menu '>
-            <li onClick={()=>{setMenu("shop")}}> <Link style={{textDecoration:'none'}} to='/'>Shop</Link>{menu==="shop"?<hr/>:<></>}</li>
-            <li onClick={()=>{setMenu("Men")}}>  <Link style={{textDecoration:'none'}}  to='/Men'>Men </Link>{menu==="Men"?<hr/>:<></>} </li>
+            <li onClick={()=>{setMenu("shop")}}> <Link style={{textDecoration:'none'}} to='/'>Shop</Link> {menu==="shop"?<hr/>:<></>}</li>
+            <li onClick={()=>{setMenu("Men")}}>  <Link style={{textDecoration:'none'}}  to='/Men'>Men </Link> {menu==="Men"?<hr/>:<></>} </li>
             <li onClick={()=>{setMenu("Women")}}> <Link style={{textDecoration:'none'}}  to='/Women'>Women</Link> {menu==="Women"?<hr/>:<></>}</li>
             <li onClick={()=>{setMenu("Kids")}}>  <Link style={{textDecoration:'none'}}  to='/Kids'>Kids</Link> {menu==="Kids"?<hr/>:<></>}</li>
         </ul>
