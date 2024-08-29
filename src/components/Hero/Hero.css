@@ -1,0 +1,136 @@
+.hero {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    background-image: linear-gradient(to bottom, rgba(250, 115, 5, 0.5), rgba(255, 255, 255, 0.5));
+    box-shadow: 0 1px 3px -2px black;
+    align-items: center;
+    padding: 20px;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+}
+
+.hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0px;
+    margin-top: auto;
+    text-transform: capitalize;
+    margin-left: 50px; /* Reduced margin for better responsiveness */
+}
+
+.hero-left h2 {
+    margin-top: 20px; /* Reduced margin for smaller screens */
+    font-size: 2rem; /* Adjust font size */
+}
+
+.hero-left p {
+    font-size: 3rem; /* Adjust font size */
+    font-weight: 800;
+    margin: 20px 0 0 0;
+}
+
+.hero-left button {
+    margin-top: 100px; /* Adjusted for smaller screens */
+    text-transform: capitalize;
+    width: 250px;
+    height: 55px;
+    outline: none;
+    border: 1px solid rgb(245, 133, 6);
+    border-radius: 75px;
+    color: rgb(7, 7, 7);
+    font-size: 20px;
+    font-weight: 500;
+    background-color: rgb(248, 142, 72);
+    cursor: pointer;
+    margin-bottom: 80px;
+}
+.latest-collection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.hero-left button:hover{
+    background: orange;
+    cursor: pointer;
+}
+
+.hero-right {
+    display: flex;
+    justify-content: center;
+    margin-left: auto; /* Adjust to align properly on larger screens */
+    margin-right: 50px; /* Adjust for smaller screens */
+}
+
+/* Media Queries for Responsiveness */
+
+/* For tablets and smaller desktops */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column; /* Stack items vertically */
+        padding: 20px;
+    }
+
+    .hero-left {
+        align-items: center; /* Center content on smaller screens */
+        margin-left: 20px; /* Reduced margin */
+        margin-right: 20px; /* Add right margin for consistency */
+    }
+
+    .hero-left h2 {
+        font-size: 1.75rem; /* Reduce font size */
+    }
+
+    .hero-left p {
+        font-size: 2.5rem; /* Reduce font size */
+    }
+
+    .hero-left button {
+        width: 180px; /* Reduce button width */
+        height: 45px; /* Reduce button height */
+        font-size: 18px; /* Reduce font size */
+    }
+
+    .hero-right {
+        margin-left: 0; /* Reset margin for centering */
+        margin-top: 20px; /* Add top margin */
+        justify-content: center; /* Center image on smaller screens */
+    }
+}
+
+/* For mobile phones */
+@media (max-width: 480px) {
+    .hero {
+        padding: 10px;
+    }
+
+    .hero-left {
+        align-items: center;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .hero-left h2 {
+        font-size: 1.5rem; /* Further reduce font size */
+    }
+
+    .hero-left p {
+        font-size: 2rem; /* Further reduce font size */
+        text-align: center; /* Center text for better readability */
+    }
+
+    .hero-left button {
+        width: 150px; /* Further reduce button width */
+        height: 40px; /* Further reduce button height */
+        font-size: 16px; /* Reduce font size */
+        margin-top: 20px; /* Reduce margin */
+        margin-bottom: 30px; /* Adjust bottom margin */
+    }
+
+    .hero-right {
+        margin: 0 auto; /* Center image */
+        width: 100%; /* Ensure it fits within the screen */
+    }
+}

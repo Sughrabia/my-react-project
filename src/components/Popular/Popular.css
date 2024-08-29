@@ -1,0 +1,107 @@
+.popular-products {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 60px;
+    padding: 0 20px;
+}
+.popular-products hr{
+    background: #0a0a0a;
+    height: 4px;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+
+.list-products {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+    justify-content: center; /* Center items in a row */
+    margin-bottom: 50px;
+}
+
+.product-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    min-width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    background-color: #fff; /* Ensure background is white */
+    max-width: 100%; /* Ensures it doesn't overflow on small screens */
+}
+
+.product-item:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 12px;
+}
+
+.product-details {
+    margin-top: 10px;
+}
+
+.product-name {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.product-description {
+    font-size: 1rem;
+    margin-bottom: 16px;
+    color: #0a0a0a;
+}
+
+.product-price {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #1a73e8;
+}
+
+/* Media Queries for Responsiveness */
+
+/* For tablets and smaller desktops */
+@media (max-width: 768px) {
+    .product-item {
+        min-width: 250px;
+        padding: 12px;
+    }
+
+    .product-name {
+        font-size: 1.25rem;
+    }
+
+    .product-price {
+        font-size: 1.15rem;
+    }
+}
+
+/* For mobile phones */
+@media (max-width: 480px) {
+    .list-products {
+        flex-direction: column; /* Stack items vertically */
+        gap: 20px;
+    }
+
+    .product-item {
+        min-width: 100%;
+        padding: 10px;
+    }
+
+    .product-name {
+        font-size: 1.2rem;
+    }
+
+    .product-price {
+        font-size: 1.1rem;
+    }
+}
