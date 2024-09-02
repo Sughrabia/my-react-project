@@ -1,6 +1,6 @@
 import React from 'react'
 import "./Hero.css"
-import shop1 from '../assets/shop1.jpg';
+import shop1 from "../assets/shop1.png"
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 const Hero = () => {
