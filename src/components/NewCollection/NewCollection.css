@@ -1,140 +1,51 @@
 .new-collection{
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 80%;
-    height: auto;
-    background-image: linear-gradient(to bottom, rgba(250, 115, 5, 0.5), rgba(255, 255, 255, 0.5));
-    box-shadow: 0 1px 3px -2px black;
-    padding: 20px;
-    flex-wrap: wrap; /* Allows wrapping on smaller screens */
-    margin: 100px 0px 100px 160px;
-}
-
-.collection-left {
-    display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
-    gap: 0px;
-    margin-top: auto;
-    text-transform: capitalize;
-    margin-left: 50px; /* Reduced margin for better responsiveness */
+    gap: 10px;
 }
-
-.collection-left h2 {
-    margin-top: 20px; /* Reduced margin for smaller screens */
-    font-size: 2rem; /* Adjust font size */
+.new-collection h1{
+    text-transform: uppercase;
+    font-weight: 700;
 }
-
-.collection-left p {
-    font-size: 3rem; /* Adjust font size */
-    font-weight: 800;
-    margin: 20px 0 0 0;
+.new-collection hr{
+    width: 150px;
+    height: 4px;
+    background: black;
+    border: none;
 }
-
-.collection-left button {
-    margin-top: 30px; /* Adjusted for smaller screens */
-    text-transform: capitalize;
-    width: 240px;
-    height: 50px;
-    outline: none;
-    border: 1px solid rgb(245, 133, 6);
-    border-radius: 75px;
-    color: rgb(7, 7, 7);
-    font-size: 20px;
-    font-weight: 500;
-    background-color: rgb(245, 128, 50);
-    cursor: pointer;
-    margin-bottom: 100px;
-}
-.collection-left button:hover{
-    background: orange;
-    cursor: pointer;
-}
-.check-now{
+.collection-list{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 100px;
 }
-.collection-right {
-    display: flex;
-    justify-content: center;
-    margin-left: auto; /* Adjust to align properly on larger screens */
-    margin-right: 50px; /* Adjust for smaller screens */
+.collection-item{
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    text-transform: capitalize;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    min-width: 300px;
+    max-width: 100%;
+    background-color: rgb(253, 253, 252);
+    text-align: center;
 }
-.img{
-    width: 400px;
+.collection-item img{
+    object-fit: cover;
+    height: 300px;
+    width: 100%;
 }
-
-/* Media Queries for Responsiveness */
-
-/* For tablets and smaller desktops */
-@media (max-width: 768px) {
-    .new-collection{
-        flex-direction: column; /* Stack items vertically */
-        padding: 20px;
-    }
-
-    .collection-left {
-        align-items: center; /* Center content on smaller screens */
-        margin-left: 20px; /* Reduced margin */
-        margin-right: 20px; /* Add right margin for consistency */
-    }
-
-    .collection-left h2 {
-        font-size: 1.75rem; /* Reduce font size */
-    }
-
-    .collection-left p {
-        font-size: 2.5rem; /* Reduce font size */
-    }
-
-    .collection-left button {
-        width: 180px; /* Reduce button width */
-        height: 45px; /* Reduce button height */
-        font-size: 18px; /* Reduce font size */
-    }
-
-    .collection-right {
-        margin-left: 0; /* Reset margin for centering */
-        margin-top: 20px; /* Add top margin */
-        justify-content: center; /* Center image on smaller screens */
-    }
+.collection-item:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* For mobile phones */
-@media (max-width: 480px) {
-    .new-collection{
-        padding: 10px;
-    }
-
-    .collection-left {
-        align-items: center;
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-
-    .collection-left h2 {
-        font-size: 1.5rem; /* Further reduce font size */
-    }
-
-    .collection-left p {
-        font-size: 2rem; /* Further reduce font size */
-        text-align: center; /* Center text for better readability */
-    }
-
-    .collection-left button {
-        width: 150px; /* Further reduce button width */
-        height: 40px; /* Further reduce button height */
-        font-size: 16px; /* Reduce font size */
-        margin-top: 20px; /* Reduce margin */
-        margin-bottom: 30px; /* Adjust bottom margin */
-    }
-
-    .collection-right {
-        margin: 0 auto; /* Center image */
-        width: 100%; /* Ensure it fits within the screen */
-    }
+.collection-price{
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #1a73e8;
 }

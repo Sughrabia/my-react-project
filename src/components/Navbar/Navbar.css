@@ -1,6 +1,6 @@
 .Navbar {
     display: flex;
-    justify-content: space-around; /* Changed to space-between for better alignment on smaller screens */
+    justify-content: space-around;
     align-items: center;
     padding: 0px;
     box-shadow: 0 1px 3px -2px black;
@@ -10,7 +10,7 @@
 .nav-logo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    /* gap: 10px; */
 }
 
 .nav-logo p {

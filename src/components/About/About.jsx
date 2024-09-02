@@ -1,6 +1,7 @@
 import React from 'react'
+import "./About.css"
 
-const Product = () => {
+const About = () => {
   return (
     <div>
       
@@ -8,4 +9,4 @@ const Product = () => {
   )
 }
 
-export default Product
+export default About

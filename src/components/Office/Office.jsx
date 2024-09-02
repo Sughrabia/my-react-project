@@ -1,6 +1,7 @@
 import React from 'react'
+import "./Office.css"
 
-const Product = () => {
+const Office = () => {
   return (
     <div>
       
@@ -8,4 +9,4 @@ const Product = () => {
   )
 }
 
-export default Product
+export default Office
