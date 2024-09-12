@@ -1,34 +1,37 @@
-import React from 'react'
-import all_products from '../components/assets/AllProducts'
+import { useContext } from "react";
+import "./css/shopcategory.css"; 
+import { shopContext } from "../Context/ShopContext";
 
 const ShopCategory = (props) => {
-  const filteredProducts = all_products.filter(product => product.category === props.category);
+  const { all_products } = useContext(shopContext);
+
   return (
     <div className='Shopcategory'>
-        <img src={props.banner} alt="Banner" style={{ width: '90%', height: '500px' }} />
-        <div>
-          <p>showing 1-12 out of 36 products</p>
-          <div>
-            {/* sort by <img src={dropdown_icon} alt="" /> */}
-          </div>
+      <div className='Banner'>
+        <div className='banner-detail'>
+          <h1>Flat 50% off</h1>
+          <p>12 hours 20 mins</p>
+          <button className='explore-more'>Explore More</button>
         </div>
-        <div>
-        { filteredProducts.map((all_products)=>(
-          <div key={all_products.id} className='all_products-item'>
-            <img src={all_products.image} alt={all_products.name} className='item-img'/>
-            <div className='all_products-detail'>
-              <h2 className='all_products-name'>{all_products.name}</h2>
-              <p className='all_products-price'>${all_products.old_price}</p>
-              <p className='all_products-price'>${all_products.new_price}</p>
+        <div><img src={props.banner} alt="Banner" className='banner-img' /></div>
+      </div>
+      <p><span>Showing 1-12</span> out of products</p>
+      <div className='shopcategory-products'>
+        {all_products
+          .filter((item) => item.category === props.category) // Filter products by the category from props
+          .map((item) => (
+            <div key={item.id} className='all_products-item'>
+              <img src={item.image} alt={item.name} className='item-img' />
+              <div className='all_products-detail'>
+                <h2 className='all_products-name'>{item.name}</h2>
+                <p className='all_products-price old'>${item.old_price}</p>
+                <p className='all_products-price new'>${item.new_price}</p>
+              </div>
             </div>
-
-          </div>
-         
-           
-        ))}
-        </div>
+          ))}
+      </div>
     </div>
   );
 };
 
-export default ShopCategory
+export default ShopCategory;
