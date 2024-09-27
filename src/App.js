@@ -8,14 +8,14 @@ import Product from './pages/Product';
 import Cart from './pages/Cart';
 import LoginSignup from './pages/LoginSignup';
 import Footer from './components/Footer/Footer';
-import Company from './components/Company/Company';
 import About from './components/About/About';
 import Contactus from './components/Contactus/Contactus';
-import Office from './components/Office/Office';
+import FAQ from './components/FAQ/FAQ';
 import Women_banner from './components/assets/Women_banner.png';
 import Men_banner from './components/assets/Men_banner.png';
 import Kids_banner from './components/assets/Kids_banner.png';
 import Login from './pages/login';
+import PrivacyPolicy from './components/PrivacyPolicy/PrivacyPolicy';
 
 function App() {
   return (
@@ -31,10 +31,10 @@ function App() {
           <Route path='/Cart' element={<Cart />} />
           <Route path='/Loginsignup' element={<LoginSignup />} />
           <Route path='/login' element={<Login/>}/>
-          <Route path='/Company' element={<Company />} />
-          <Route path='/AboutUs' element={<About />} />
-          <Route path='/ContactUs' element={<Contactus />} />
-          <Route path='/Office' element={<Office />} />
+          <Route path='/about-us' element={<About />} />
+          <Route path='/contact-us' element={<Contactus />} />
+          <Route path="/FAQ" element={<FAQ />} />
+          <Route path='/privacy-policy' element={<PrivacyPolicy/>}/>
         </Routes>
         <Footer />
       </BrowserRouter>
