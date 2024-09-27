@@ -12,7 +12,10 @@ function Dashboard({ children }) {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/profile">Profile</Link>
+            <Link to="/custompages">custom pages</Link>
+            <li>
+              <Link to="/pages">pageslist</Link>
+            </li>
           </li>
           <li>
             <Link to="/settings">Settings</Link>

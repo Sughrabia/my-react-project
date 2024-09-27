@@ -1,0 +1,23 @@
+.privacy-policy-container {
+    padding: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  h1{
+    color: #eb7303; /* Your theme color */
+  }
+  h2 {
+    color: #050505; /* Your theme color */
+  }
+  p, ul {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  ul {
+    padding-left: 20px;
+  }
+  
