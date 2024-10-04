@@ -1,34 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import './Contactus.css';
 
-const Contactus = () => {
-  return (
-    <div className='contactus'>
-      <div className='contactus-heading'>
-        <h1>Contact Us</h1>
-        <p>
-          Have any questions? We're here to help! Reach out to us and we'll get
-          back to you as soon as possible.
-        </p>
-      </div>
-      
-      <div className='contactus-info'>
-        <div className='contact-details'>
-          <p><strong>Address:</strong> 123 Fashion Avenue, New York, NY 10001</p>
-          <p><strong>Phone:</strong> +1 234 567 890</p>
-          <p><strong>Email:</strong> support@glamgrab.com</p>
-        </div>
+const Contactus= () => {
+  const { slug } = useParams();  // This will capture the slug if present
+  const [page, setPage] = useState(null);
 
-        <div className='contactus-form'>
-          <h3>Send Message</h3>
-          <form>
-            <input type='text' placeholder='Full Name' required />
-            <input type='email' placeholder='Email' required />
-            <textarea placeholder='Type your message...' required />
-            <button type='submit'>Send</button>
-          </form>
-        </div>
-      </div>
+  useEffect(() => {
+    const fetchPage = async () => {
+      try {
+        let response;
+        if (slug) {
+          // Fetch a specific FAQ page by slug
+          response = await axios.get(`http://localhost:5000/customPage/pages/${slug}`);
+        } else {
+          // Fetch the default FAQ page or FAQ list
+          response = await axios.get('http://localhost:5000/customPage/pages/contact-us');  // Adjust endpoint accordingly
+        }
+        setPage(response.data);
+      } catch (error) {
+        console.error('Error fetching the page:', error);
+      }
+    };
+    fetchPage();
+  }, [slug]);
+
+  if (!page) return <div>Loading...</div>;
+
+  return (
+    <div className="contact-us">
+      <h1>{page.title}</h1>
+      <div className='contact-details' dangerouslySetInnerHTML={{ __html: page.content }} />
     </div>
   );
 };

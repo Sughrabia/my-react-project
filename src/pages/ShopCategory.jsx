@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import "./css/shopcategory.css"; 
+import { Link } from 'react-router-dom';
 import { shopContext } from "../Context/ShopContext";
 
 const ShopCategory = (props) => {
@@ -37,12 +38,13 @@ const ShopCategory = (props) => {
           .filter((item) => item.category === props.category) // Filter products by category
           .map((item) => (
             <div key={item._id} className='all_products-item'> {/* Use _id as the key */}
+             <Link style={{textDecoration:'none'}} to={`/product/${item._id}`}>
               <img src={item.image} alt={item.name} className='item-img' />
               <div className='all_products-detail'>
                 <h2 className='all_products-name'>{item.name}</h2>
-                <p className='all_products-price old'>old price ${item.old_price}</p>
-                <p className='all_products-price new'>new price ${item.new_price}</p>
+                <p className='all_products-price new'>price ${item.price}</p>
               </div>
+              </Link>
             </div>
           ))}
       </div>

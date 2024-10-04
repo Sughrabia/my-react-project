@@ -32,6 +32,22 @@
     margin-top: 5px;
     width: 100%;
   }
+  .create-product-container select{
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+    width: 100%;
+  }
+  .create-product-container textarea{
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+    width: 100%;
+  }
   
   .create-product-container button {
     padding: 10px 20px;

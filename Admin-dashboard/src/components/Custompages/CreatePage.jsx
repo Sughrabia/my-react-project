@@ -47,8 +47,8 @@ const CreateCustomPage = () => {
           onChange={(e) => setContent(e.target.value)}
           required
         />
-        <button type="submit">Create</button>
-        <button type="button" onClick={() => navigate('/admin/custom-pages')}>Cancel</button>
+        <button type="submit" onClick={() => navigate('/custompages')}>Create</button>
+        <button type="button" onClick={() => navigate('/custompages')}>Cancel</button>
       </form>
       {message && <p className="message">{message}</p>}
     </div>

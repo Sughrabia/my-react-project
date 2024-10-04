@@ -9,7 +9,7 @@ const Shop = () => {
   return (
     <div>
       <Hero/>
-      <Popluar/>
+      <Popluar category="Popular" />
       <Offer/>
       <NewCollection/>
     </div>

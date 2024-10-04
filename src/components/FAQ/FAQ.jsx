@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import './FAQ.css';
 
 const FAQ = () => {
   const { slug } = useParams();  // This will capture the slug if present
@@ -29,7 +30,7 @@ const FAQ = () => {
 
   return (
     <div className="page-container">
-      <h1>{page.title}</h1>
+      <h1 >{page.title}</h1>
       <div dangerouslySetInnerHTML={{ __html: page.content }} />
     </div>
   );

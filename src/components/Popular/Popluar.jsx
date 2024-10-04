@@ -1,64 +1,63 @@
-import React from 'react'
-import "./Popular.css"
-import product from '../assets/product.jpg'; 
-import product1 from '../assets/product1.jpg'; 
-import product2 from '../assets/product2.jpg'; 
-import product3 from '../assets/product3.jpg'; 
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import './Popular.css'
 
 
+const NewCollection = ( props) => {
+  const [all_products, setProducts] = useState([]); // Initialize as an empty array
+  const [loading, setLoading] = useState(true); // To handle loading state
 
-const Popluar = () => {
+  useEffect(() => {
+    // Fetch products from the backend API
+    fetch('http://localhost:5000/product')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setProducts(data); // Update the state with the products fetched
+        setLoading(false);  // Stop loading
+      })
+      .catch((error) => {
+        console.error('Error fetching products:', error);
+        setLoading(false); // Stop loading on error as well
+      });
+  }, []); // Remove setProducts from the dependency array
 
-    const productsitems = [
-        {
-            id: 1,
-            name: "Sample Product 1",
-            description: "This is the first sample product.",
-            price: 19.99,
-            image: product,
-        },
-        {
-            id: 2,
-            name: "Sample Product 2",
-            description: "This is the second sample product.",
-            price: 29.99,
-            image: product1,
-        },
-        {
-            id: 3,
-            name: "Sample Product 3",
-            description: "This is the third sample product.",
-            price: 39.99,
-            image: product2,
-        },
-        {
-            id: 4,
-            name: "Sample Product 2",
-            description: "This is the fourth sample product.",
-            price: 29.99,
-            image: product3,
-        },
-    ];
-    
+  if (loading) {
+    return <p>Loading products...</p>; // Show loading message until data is fetched
+  }
 
   return (
-    <div className='popular-products'>
-        <div className='heading'> <h1> POPULAR IN WOMENS</h1><hr/></div>
-        <div className='list-products'>
-        {productsitems.map((product) => (
-            <div key={product.id} className="product-item">
-                <img src={product.image} alt={product.name} className="product-image" />
-                <div className="product-details">
-                    <h2 className="product-name">{product.name}</h2>
-                    <p className="product-description">{product.description}</p>
-                    <p className="product-price">${product.price.toFixed(2)}</p>
-                </div>
+    <div className='new-collection'>
+      <div>
+        <h1>Popular In Women</h1>
+        <hr />
+      </div>
+
+      <div className='shopcategory-products'>
+        {all_products.length > 0 ? ( // Check if there are products to display
+          all_products
+          .filter((item) => item.category === props.category)
+          .map((item) => (
+            <div key={item._id} className='all_products-item'> {/* Use _id as the key */}
+              <Link style={{textDecoration:'none'}} to={`/product/${item._id}`}>
+              <img src={`http://localhost:5000/${item.image}`} alt={item.name} className='item-img' />
+              <div className='all_products-detail'>
+                <h2 className='all_products-name'>{item.name}</h2>
+                <p className='all_products-price new'>Price: ${item.price}</p>
+              </div>
+              </Link>
             </div>
-        ))}
-        </div>
-       
+          ))
+        ) : (
+          <p>No products available.</p> // Handle case where no products are found
+        )}
+      </div>
     </div>
   );
 };
 
-export default Popluar
+export default NewCollection;

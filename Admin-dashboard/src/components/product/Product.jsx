@@ -49,45 +49,52 @@ const Product = () => {
 
   return (
     <div>
-      <h1>Products</h1>
+      <h1>Manage Products</h1>
       <Link to="/create-product">
         <button>Create New Product</button>
       </Link>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Images</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentProducts.map((product) => (
-            <tr key={product._id}>
-              <td>{product._id}</td>
-              <td>{product.name}</td>
-              <td>{product.category}</td>
-              <td><img src={product.imageUrl} alt={product.name} width="50" /></td>
-              <td>
-                <Link to={`/edit-product/${product._id}`}>
-                  <button>Edit</button>
-                </Link>
-                <button onClick={() => handleDelete(product._id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div>
-        <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
-          Previous
-        </button>
-        <button onClick={() => paginate(currentPage + 1)} disabled={indexOfLastProduct >= products.length}>
-          Next
-        </button>
-      </div>
+      {products.length > 0 ? (
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>Sr #</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Images</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentProducts.map((product, index) => (
+                <tr key={product._id}>
+                  <td>{indexOfFirstProduct + index + 1}</td>
+                  <td>{product.name}</td>
+                  <td>{product.category}</td>
+                  <td><img src={product.imageUrl} alt={product.name} width="50" /></td>
+                  <td>
+                    <Link to={`/edit-product/${product._id}`}>
+                      <button>Edit</button>
+                    </Link>
+                    <button onClick={() => handleDelete(product._id)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <div>
+            <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
+              Previous
+            </button>
+            <button onClick={() => paginate(currentPage + 1)} disabled={indexOfLastProduct >= products.length}>
+              Next
+            </button>
+          </div>
+        </div>
+      ) : (
+        <p>No products found</p>
+      )}
     </div>
   );
 };

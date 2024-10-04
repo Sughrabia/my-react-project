@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
+import { useNavigate } from 'react-router-dom';
 import './createproduct.css';
 
 const CreateProductPage = () => {
   const [imageFile, setImageFile] = useState(null);
+  const [additionalImages, setAdditionalImages] = useState([]);
   const [newProduct, setNewProduct] = useState({
     name: '',
     category: '',
-    imageUrl: '',
-    oldPrice: '',
-    newPrice: '',
+    price: '',
+    description: '',
   });
 
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
-  // Handle form input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNewProduct({ ...newProduct, [name]: value });
@@ -22,41 +21,50 @@ const CreateProductPage = () => {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    setImageFile(file); // Store the file in state
+    setImageFile(file);
   };
 
+  const handleAdditionalImagesChange = (e) => {
+    const files = Array.from(e.target.files);
+    setAdditionalImages(files);
+  };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('name', newProduct.name);
-    formData.append('category',newProduct.category);
-    formData.append('oldPrice', newProduct.oldPrice);
-    formData.append('newPrice', newProduct.newPrice);
+
+    const data = new FormData();
+    data.append('name', newProduct.name);
+    data.append('category', newProduct.category);
+    data.append('price', newProduct.price);
+    data.append('description', newProduct.description);
+    
     if (imageFile) {
-      formData.append('image', imageFile); // Append image file if uploaded
+      data.append('image', imageFile);
+    }
+
+    if (additionalImages) {
+      for (let i = 0; i < additionalImages.length; i++) {
+        data.append('additionalImages', additionalImages[i]);
+      }
     }
 
     try {
       const response = await fetch('http://localhost:5000/product/create', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newProduct),
+        body: data, 
       });
+
       if (response.ok) {
-        // Handle successful product creation
         alert('Product created successfully');
         setNewProduct({
           name: '',
           category: '',
-          imageUrl: '',
-          oldPrice: '',
-          newPrice: '',
+          price: '',
+          description: '',
         });
-        navigate('/product'); // Redirect to the products page after creation
+        setImageFile(null);
+        setAdditionalImages([]);
+        navigate('/product');
       } else {
         console.error('Failed to create product');
       }
@@ -81,45 +89,74 @@ const CreateProductPage = () => {
         </label>
         <label>
           Category:
-          <input
-            type="text"
+          <select
             name="category"
             value={newProduct.category}
             onChange={handleChange}
             required
-          />
+          >
+            <option value="" disabled>Select a category</option>
+            <option value="Men">Men</option>
+            <option value="Women">Women</option>
+            <option value="Kids">Kids</option>
+            <option value="Popular">Popular</option>
+          </select>
         </label>
+
         <label>
-          Old Price:
+          Price:
           <input
             type="number"
-            name="oldPrice"
-            value={newProduct.oldPrice}
+            name="price"
+            value={newProduct.price}
             onChange={handleChange}
             required
           />
         </label>
         <label>
-          New Price:
-          <input
-            type="number"
-            name="newPrice"
-            value={newProduct.newPrice}
+          Description:
+          <textarea
+            name="description"
+            value={newProduct.description}
             onChange={handleChange}
             required
           />
-        </label> 
+        </label>
         <label>
-          Image:
+          Main Image:
           <input
             type="file"
             name="image"
             onChange={handleImageChange}
+            required 
           />
         </label>
+
         {imageFile && (
           <img src={URL.createObjectURL(imageFile)} alt="Preview" width="100" />
         )}
+        <label>
+          Additional Images:
+          <input
+            type="file"
+            name="additionalImages"
+            multiple
+            onChange={handleAdditionalImagesChange}
+          />
+        </label>
+        {additionalImages.length > 0 && (
+          <div className="image-previews">
+            {additionalImages.map((image, index) => (
+              <img
+                key={index}
+                src={URL.createObjectURL(image)}
+                alt={`Preview ${index + 1}`}
+                width="100"
+              />
+            ))}
+          </div>
+        )}
+
         <button type="submit">Create Product</button>
       </form>
     </div>

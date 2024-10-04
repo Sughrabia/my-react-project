@@ -1,39 +1,42 @@
-.contactus {
+.contact-us {
     background-color: #f7f6f4;
     color: rgb(7, 7, 7);
-    padding: 50px 0;
+    padding: 50px 30px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 400px;
   }
   
-  .contactus-heading h1 {
+  .contact-us h1 {
     font-size: 2.5em;
     color: #ff7f50; /* Mustard orange accent */
   }
   
-  .contactus-heading p {
-    margin: 20px 0;
+  .contact-us  p {
+    margin: 20px 10px;
     font-size: 1.1em;
   }
   
-  .contactus-info {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 50px;
-    margin-top: 40px;
-  }
+  
   
   .contact-details {
-    text-align: left;
-    max-width: 300px;
+    padding-top: 2px;
+    text-align: center;
+    /* max-width: 300px; */
+    display: flex;
   }
   
   .contact-details p {
     margin: 10px 0;
     font-size: 1.1em;
   }
+  .contact-form{
+    margin-top: 10px;
+  }
+    
   
-  .contactus-form {
+  .contact-us form {
     background-color: white;
     padding: 30px;
     border-radius: 10px;
@@ -42,13 +45,13 @@
     width: 100%;
   }
   
-  .contactus-form h3 {
+  .contact-us form h3 {
     color: #ff7f50;
     margin-bottom: 20px;
   }
   
-  .contactus-form input,
-  .contactus-form textarea {
+  .contact-us form input,
+  .contact-us form textarea {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -56,7 +59,7 @@
     border-radius: 5px;
   }
   
-  .contactus-form button {
+  .contact-us form button {
     background-color: #ff7f50;
     color: white;
     padding: 10px 20px;
@@ -66,7 +69,6 @@
     font-size: 1.1em;
   }
   
-  .contactus-form button:hover {
+  .contact-us form button:hover {
     background-color: #ff9c68;
   }
-  

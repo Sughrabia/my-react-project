@@ -42,7 +42,6 @@ const CustomPages = () => {
       <table className="custom-pages-table">
         <thead>
           <tr>
-            <th>Page ID</th>
             <th>Page Title</th>
             <th>Page Slug</th>
             <th>Action</th>
@@ -51,7 +50,6 @@ const CustomPages = () => {
         <tbody>
           {pages.map((page) => (
             <tr key={page.slug}> {/* Use slug or unique identifier */}
-              <td>{page.id}</td>
               <td>{page.title}</td>
               <td>{page.slug}</td>
               <td>

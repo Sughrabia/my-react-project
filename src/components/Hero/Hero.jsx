@@ -2,6 +2,7 @@ import React from 'react'
 import "./Hero.css"
 import shop1 from "../assets/shop1.png"
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -11,7 +12,10 @@ const Hero = () => {
             <p>new </p>
             <p>collection </p>
             <p>for everyone</p>
-            <button className='latest-collection'>latest collection <ArrowForwardIcon /></button>
+            <Link style={{textDecoration:'none'}} to="/NewCollection">
+              <button className='latest-collection'>latest collection <ArrowForwardIcon /></button>
+            </Link>
+            
         </div>
         <div className='hero-right'>
             <img src={shop1} alt="img" className='img1'/>
