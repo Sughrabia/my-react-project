@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-import './editCustomPage.css'; // Add your styles
-
+import './custompage.css'
 const EditCustomPage = () => {
   const { slug } = useParams(); // Get the slug from the URL parameters
   const [pageData, setPageData] = useState({ title: '', content: '', slug: '' });
@@ -12,7 +11,7 @@ const EditCustomPage = () => {
   useEffect(() => {
     const fetchPageData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/customPage/admin/pages/${slug}`);
+        const response = await axios.get(`http://localhost:5000/customPage/pages/${slug}`);
         setPageData(response.data); // Set the page data in state
       } catch (error) {
         console.error('Error fetching page data:', error);
@@ -25,7 +24,7 @@ const EditCustomPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/customPage/pages', pageData); // Use your existing API for create/update
+      await axios.put(`http://localhost:5000/customPage/edit-pages/${slug}`, pageData); // Use the correct update API
       navigate('/custompages'); // Redirect to the custom pages management
     } catch (error) {
       console.error('Error updating page:', error);
@@ -39,9 +38,9 @@ const EditCustomPage = () => {
   };
 
   return (
-    <div className="edit-custom-page-container">
+    <div className="custom-page-container">
       <h1>Edit Custom Page</h1>
-      <form onSubmit={handleSubmit}>
+      <form className="custom-page-form" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="title">Title:</label>
           <input
@@ -76,6 +75,7 @@ const EditCustomPage = () => {
           />
         </div>
         <button type="submit">Save Changes</button>
+        <button type="button" onClick={() => navigate('/custompages')}>Cancel</button>
       </form>
     </div>
   );

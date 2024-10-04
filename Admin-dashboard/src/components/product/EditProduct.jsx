@@ -7,9 +7,8 @@ const EditProductPage = () => {
   const [productData, setProductData] = useState({
     name: '',
     category: '',
-    imageUrl: '',
-    oldPrice: '',
-    newPrice: '',
+    price: '',
+    description: '',
   });
   const [imageFile, setImageFile] = useState(null); // State to store the uploaded file
   const [loading, setLoading] = useState(true); // Add loading state
@@ -26,19 +25,25 @@ const EditProductPage = () => {
     setImageFile(file); // Store the file in state
   };
 
+  // Fetch the product data based on the ID
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/product/edit/${id}`);
+        const response = await fetch(`http://localhost:5000/product/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch product data');
         }
         const data = await response.json();
-        setProductData(data); // Populate the form with the product data
-        setLoading(false);    // Set loading to false when data is fetched
+        setProductData({
+          name: data.name,
+          category: data.category,
+          price: data.price,
+          description: data.description,
+        });
+        setLoading(false); // Stop loading once data is fetched
       } catch (error) {
         console.error('Error fetching product:', error);
-        setLoading(false);    // In case of error, stop the loading state
+        setLoading(false);
       }
     };
   
@@ -48,12 +53,12 @@ const EditProductPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Creating form data for image and other fields
+    // Prepare the form data
     const formData = new FormData();
     formData.append('name', productData.name);
     formData.append('category', productData.category);
-    formData.append('oldPrice', productData.oldPrice);
-    formData.append('newPrice', productData.newPrice);
+    formData.append('price', productData.price);
+    formData.append('description', productData.description);
     if (imageFile) {
       formData.append('image', imageFile); // Append image file if uploaded
     }
@@ -75,7 +80,7 @@ const EditProductPage = () => {
     }
   };
 
-  // Render a loading message while fetching the product data
+  // Render loading state while product data is being fetched
   if (loading) {
     return <div>Loading product data...</div>;
   }
@@ -84,7 +89,7 @@ const EditProductPage = () => {
     <div className="create-product-container">
       <h1>Edit Product</h1>
       <form onSubmit={handleSubmit}>
-        <label>
+      <label>
           Name:
           <input
             type="text"
@@ -105,33 +110,34 @@ const EditProductPage = () => {
           />
         </label>
         <label>
-          Old Price:
+          Price:
           <input
             type="number"
-            name="oldPrice"
-            value={productData.oldPrice}
+            name="price"
+            value={productData.price}
             onChange={handleChange}
             required
           />
         </label>
         <label>
-          New Price:
-          <input
-            type="number"
-            name="newPrice"
-            value={productData.newPrice}
+          Description:
+          <textarea
+            name="description"
+            value={productData.description}
             onChange={handleChange}
             required
           />
         </label>
         <label>
-          Image:
+          Main Image:
           <input
             type="file"
             name="image"
             onChange={handleImageChange}
+            required 
           />
         </label>
+
         {imageFile && (
           <img src={URL.createObjectURL(imageFile)} alt="Preview" width="100" />
         )}

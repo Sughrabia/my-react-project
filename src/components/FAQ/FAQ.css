@@ -1,43 +1,31 @@
-.faq-container {
-    max-width: 900px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: 'Arial', sans-serif;
-  }
-  
-  .faq-container h1 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 40px;
-    color: #ff8c00; /* Mustard/Orange theme color */
-  }
-  
-  .faq-item {
-    margin-bottom: 30px;
-  }
-  
-  .faq-item h2 {
-    font-size: 1.5rem;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .faq-item p {
-    font-size: 1.1rem;
-    color: #555;
-    line-height: 1.8;
-    margin-left: 20px;
-  }
-  
-  .faq-item h2::before {
-    content: "•";
-    color: #ff8c00; /* Mustard/Orange theme color */
-    font-weight: bold;
-    display: inline-block;
-    width: 1em;
-    margin-left: -1em;
-  }
-  
+.page-container {
+  padding: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align all content to the left */
+}
+
+h1 {
+  color: #eb03eb; /* Your theme color */
+  text-align: left; /* Ensure h1 is left-aligned */
+}
+
+h2 {
+  color: #050505; /* Your theme color */
+  text-align: left; /* Ensure h2 is left-aligned */
+}
+
+p, ul {
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: left; /* Ensure paragraph and list are left-aligned */
+}
+
+ul {
+  padding-left: 20px;
+  list-style-type: disc; /* Adds bullet points to the list */
+}
