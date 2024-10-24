@@ -39,13 +39,13 @@ const CreateProductPage = () => {
     data.append('description', newProduct.description);
     
     if (imageFile) {
-      data.append('image', imageFile);
+      data.append('imageUrl', imageFile); 
     }
 
-    if (additionalImages) {
-      for (let i = 0; i < additionalImages.length; i++) {
-        data.append('additionalImages', additionalImages[i]);
-      }
+    if (additionalImages.length > 0) {
+      additionalImages.forEach((file) => {
+        data.append('additionalImages', file); 
+      });
     }
 
     try {
@@ -98,7 +98,7 @@ const CreateProductPage = () => {
             <option value="" disabled>Select a category</option>
             <option value="Men">Men</option>
             <option value="Women">Women</option>
-            <option value="Kids">Kids</option>
+            <option value="kid">Kids</option>
             <option value="Popular">Popular</option>
           </select>
         </label>
@@ -126,7 +126,7 @@ const CreateProductPage = () => {
           Main Image:
           <input
             type="file"
-            name="image"
+            name="imageUrl"
             onChange={handleImageChange}
             required 
           />

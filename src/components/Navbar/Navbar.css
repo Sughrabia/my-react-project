@@ -5,12 +5,13 @@
     padding: 0px;
     box-shadow: 0 1px 3px -2px black;
     flex-wrap: wrap; /* Allows wrapping on smaller screens */
+    overflow-x: hidden;
+      
 }
 
 .nav-logo {
     display: flex;
     align-items: center;
-    /* gap: 10px; */
 }
 
 .nav-logo p {

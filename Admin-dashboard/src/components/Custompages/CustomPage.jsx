@@ -7,7 +7,6 @@ const CustomPages = () => {
   const [pages, setPages] = useState([]);
   const navigate = useNavigate();
 
-  // Fetch pages from the API when the component mounts
   useEffect(() => {
     const fetchPages = async () => {
       try {
@@ -20,7 +19,6 @@ const CustomPages = () => {
     fetchPages();
   }, []);
 
-  // Handle delete
   const handleDelete = async (slug) => {
     try {
       await axios.delete(`http://localhost:5000/customPage/pages/${slug}`);
@@ -49,12 +47,12 @@ const CustomPages = () => {
         </thead>
         <tbody>
           {pages.map((page) => (
-            <tr key={page.slug}> {/* Use slug or unique identifier */}
+            <tr key={page.slug}>
               <td>{page.title}</td>
               <td>{page.slug}</td>
               <td>
-                <button onClick={() => navigate(`/edit-custompage/${page.slug}`)}>Edit</button>
-                <button onClick={() => handleDelete(page.slug)}>Delete</button> {/* Pass slug for deletion */}
+                <button className='edit-button' onClick={() => navigate(`/edit-custompage/${page.slug}`)}>Edit</button>
+                <button className='delete' onClick={() => handleDelete(page.slug)}>Delete</button> {/* Pass slug for deletion */}
               </td>
             </tr>
           ))}

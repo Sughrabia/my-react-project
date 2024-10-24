@@ -1,4 +1,4 @@
-.offer{
+.offer {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -6,10 +6,9 @@
     width: 80%;
     height: auto;
     background-image: linear-gradient(to bottom, rgba(250, 115, 5, 0.5), rgba(255, 255, 255, 0.5));
-    /* box-shadow: 0 1px 3px -2px black; */
     padding: 20px;
-    flex-wrap: wrap; 
-    margin: 100px 0px 100px 160px;
+    flex-wrap: wrap;
+    margin: 100px auto; /* Center the offer horizontally */
 }
 
 .offer-left {
@@ -19,22 +18,22 @@
     gap: 0px;
     margin-top: auto;
     text-transform: capitalize;
-    margin-left: 130px; 
+    margin-left: 130px;
 }
 
 .offer-left h2 {
-    margin-top: 20px; 
-    font-size: 2rem; 
+    margin-top: 20px;
+    font-size: 2rem;
 }
 
 .offer-left p {
-    font-size: 3rem; 
+    font-size: 3rem;
     font-weight: 800;
     margin: 20px 0 0 0;
 }
 
 .offer-left button {
-    margin-top: 30px; 
+    margin-top: 30px;
     text-transform: capitalize;
     width: 240px;
     height: 50px;
@@ -48,39 +47,46 @@
     cursor: pointer;
     margin-bottom: 100px;
 }
-.offer-left button:hover{
+
+.offer-left button:hover {
     background: orange;
     cursor: pointer;
 }
-.check-now{
+
+.check-now {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 15px;
 }
+
 .offer-right {
     display: flex;
     justify-content: center;
-    margin-left: auto; 
+    margin-left: auto;
     margin-right: 130px;
 }
-.img{
+
+.img {
     width: 400px;
+    max-width: 100%; /* Ensure the image scales responsively */
 }
 
 /* Media Queries for Responsiveness */
 
 /* For tablets and smaller desktops */
 @media (max-width: 768px) {
-    .offer{
+    .offer {
         flex-direction: column; /* Stack items vertically */
         padding: 20px;
+        margin: 50px auto; /* Adjust margins */
     }
 
     .offer-left {
         align-items: center; /* Center content on smaller screens */
         margin-left: 20px; /* Reduced margin */
-        margin-right: 20px; /* Add right margin for consistency */
+        margin-right: 20px;
+        text-align: center; /* Center-align text */
     }
 
     .offer-left h2 {
@@ -106,14 +112,16 @@
 
 /* For mobile phones */
 @media (max-width: 480px) {
-    .offer{
+    .offer {
         padding: 10px;
+        margin: 30px auto; /* Adjust margins for small screens */
     }
 
     .offer-left {
         align-items: center;
         margin-left: 10px;
         margin-right: 10px;
+        text-align: center;
     }
 
     .offer-left h2 {
@@ -136,5 +144,10 @@
     .offer-right {
         margin: 0 auto; /* Center image */
         width: 100%; /* Ensure it fits within the screen */
+    }
+
+    .img {
+        width: 100%; /* Make the image responsive */
+        max-width: 300px; /* Restrict the max size on small screens */
     }
 }

@@ -1,7 +1,5 @@
 .hero {
     display: flex;
-    flex-direction: row;
-    width: 100%;
     height: auto;
     background-image: linear-gradient(to bottom, rgba(250, 115, 5, 0.5), rgba(255, 255, 255, 0.5));
     /* box-shadow: 0 1px 3px -2px black; */

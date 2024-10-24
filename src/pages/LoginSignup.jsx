@@ -74,7 +74,7 @@ const LoginSignup = () => {
   return (
     <div className='loginsignup-page'>
       <div className='loginsignup-container'>
-        <h1>sign up</h1>
+        <h1>Sign Up</h1>
         <form onSubmit={handleSubmit}>
           <div className='loginsignup-fields'>
             <input

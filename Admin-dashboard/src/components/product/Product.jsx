@@ -8,10 +8,9 @@ const Product = () => {
   const [productsPerPage] = useState(10);
 
   useEffect(() => {
-    // Fetch products from backend
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:5000/product'); // Adjust URL if necessary
+        const response = await fetch('http://localhost:5000/product');
         const data = await response.json();
         setProducts(data);
       } catch (error) {
@@ -22,7 +21,6 @@ const Product = () => {
     fetchProducts();
   }, []);
 
-  // Delete product by ID
   const handleDelete = async (productId) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       try {
@@ -40,7 +38,6 @@ const Product = () => {
     }
   };
 
-  // Calculate pagination
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
@@ -71,12 +68,12 @@ const Product = () => {
                   <td>{indexOfFirstProduct + index + 1}</td>
                   <td>{product.name}</td>
                   <td>{product.category}</td>
-                  <td><img src={product.imageUrl} alt={product.name} width="50" /></td>
+                  <td><img src={`http://localhost:5000/${product.imageUrl.replace(/\\/g, '/')}`}  alt={product.name} width="50" /></td>
                   <td>
                     <Link to={`/edit-product/${product._id}`}>
-                      <button>Edit</button>
+                      <button  className='edit-button'> Edit</button>
                     </Link>
-                    <button onClick={() => handleDelete(product._id)}>Delete</button>
+                    <button className='delete' onClick={() => handleDelete(product._id)}>Delete</button>
                   </td>
                 </tr>
               ))}
