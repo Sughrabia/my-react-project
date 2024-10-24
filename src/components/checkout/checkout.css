@@ -1,0 +1,71 @@
+/* General Form Styling */
+.shipping-form {
+  width: 50%;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+.shipping-form h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.twofields {
+  display: flex;
+  gap: 30px; /* Spacing between two fields */
+}
+
+.form-group {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.form-group label {
+  display: block;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form-group.checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form-group.checkbox input {
+  margin-right: 10px;
+}
+
+.btn-next {
+  width: 100%;
+  padding: 15px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+.btn-next:hover {
+  background-color: #444;
+}
+.checkout-left{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

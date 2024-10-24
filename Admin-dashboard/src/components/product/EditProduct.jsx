@@ -3,29 +3,34 @@ import { useNavigate, useParams } from 'react-router-dom';
 import './createproduct.css';
 
 const EditProductPage = () => {
-  const { id } = useParams(); // Get the product ID from the URL
+  const { id } = useParams();
   const [productData, setProductData] = useState({
     name: '',
     category: '',
     price: '',
     description: '',
   });
-  const [imageFile, setImageFile] = useState(null); // State to store the uploaded file
-  const [loading, setLoading] = useState(true); // Add loading state
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [imageFile, setImageFile] = useState(null); 
+  const [additionalImages, setAdditionalImages] = useState([]); 
+  const [loading, setLoading] = useState(true); 
+  const navigate = useNavigate();
 
-  // Handle form input change
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProductData({ ...productData, [name]: value }); // Update the state correctly
+    setProductData({ ...productData, [name]: value }); 
   };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    setImageFile(file); // Store the file in state
+    setImageFile(file); 
   };
 
-  // Fetch the product data based on the ID
+  const handleAdditionalImagesChange = (e) => {
+    const files = Array.from(e.target.files);
+    setAdditionalImages(files);
+  };
+
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -40,7 +45,7 @@ const EditProductPage = () => {
           price: data.price,
           description: data.description,
         });
-        setLoading(false); // Stop loading once data is fetched
+        setLoading(false); 
       } catch (error) {
         console.error('Error fetching product:', error);
         setLoading(false);
@@ -53,25 +58,31 @@ const EditProductPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Prepare the form data
+    
     const formData = new FormData();
     formData.append('name', productData.name);
     formData.append('category', productData.category);
     formData.append('price', productData.price);
     formData.append('description', productData.description);
     if (imageFile) {
-      formData.append('image', imageFile); // Append image file if uploaded
+      formData.append('imageUrl', imageFile);
+    }
+
+    if (additionalImages.length > 0) {
+      additionalImages.forEach((file) => {
+        formData.append('additionalImages', file); 
+      });
     }
 
     try {
       const response = await fetch(`http://localhost:5000/product/edit/${id}`, {
         method: 'PUT',
-        body: formData, // Use FormData to send files
+        body: formData, 
       });
 
       if (response.ok) {
         alert('Product updated successfully');
-        navigate('/product'); // Redirect to the products page after update
+        navigate('/product'); 
       } else {
         console.error('Failed to update product');
       }
@@ -80,7 +91,7 @@ const EditProductPage = () => {
     }
   };
 
-  // Render loading state while product data is being fetched
+  
   if (loading) {
     return <div>Loading product data...</div>;
   }
@@ -89,7 +100,7 @@ const EditProductPage = () => {
     <div className="create-product-container">
       <h1>Edit Product</h1>
       <form onSubmit={handleSubmit}>
-      <label>
+        <label>
           Name:
           <input
             type="text"
@@ -101,13 +112,18 @@ const EditProductPage = () => {
         </label>
         <label>
           Category:
-          <input
-            type="text"
+          <select
             name="category"
             value={productData.category}
             onChange={handleChange}
             required
-          />
+          >
+            <option value="" disabled>Select a category</option>
+            <option value="Men">Men</option>
+            <option value="Women">Women</option>
+            <option value="Kid">Kids</option>
+            <option value="Popular">Popular</option>
+          </select>
         </label>
         <label>
           Price:
@@ -132,15 +148,38 @@ const EditProductPage = () => {
           Main Image:
           <input
             type="file"
-            name="image"
+            name="imageUrl"
             onChange={handleImageChange}
-            required 
           />
         </label>
 
         {imageFile && (
           <img src={URL.createObjectURL(imageFile)} alt="Preview" width="100" />
         )}
+
+        <label>
+          Additional Images:
+          <input
+            type="file"
+            name="additionalImages"
+            multiple
+            onChange={handleAdditionalImagesChange}
+          />
+        </label>
+
+        {additionalImages.length > 0 && (
+          <div className="image-previews">
+            {additionalImages.map((image, index) => (
+              <img
+                key={index}
+                src={URL.createObjectURL(image)}
+                alt={`Preview ${index + 1}`}
+                width="100"
+              />
+            ))}
+          </div>
+        )}
+
         <button type="submit">Update Product</button>
       </form>
     </div>

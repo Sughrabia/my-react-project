@@ -8,6 +8,35 @@ const ProductDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const addToCart = () => {
+    // Data to be sent to the backend for the cart item
+    const cartItem = {
+      name: product.name,
+      quantity: 1,
+      price: product.price,
+      imageUrl: product.imageUrl,
+    };
+
+    // API call to add product to cart
+    fetch('http://localhost:5000/cart/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(cartItem),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Product added to cart:', data);
+        alert('Product added to cart!');
+      })
+      .catch(error => {
+        console.error('Error adding product to cart:', error);
+        alert('Failed to add product to cart.');
+      });
+  };
+
+
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
@@ -39,16 +68,19 @@ const ProductDetails = () => {
     return <p>No product found.</p>;
   }
 
+  // Fixing the image URL path for browser compatibility
+  const normalizedimageUrl = product.imageUrl.replace(/\\/g, '/');
+
   return (
     <div className="product-details">
       <div className="main-image-container">
-        <img src={product.image} alt={product.name} className="main-image" />
+        <img src={`http://localhost:5000/${normalizedimageUrl}`} alt={product.name} className="main-image" />
       </div>
       <div className="product-info">
         <h1 style={{textTransform:'capitalize'}} className="product-title">{product.name}</h1>
-        <p className="product-price">${product.price}</p>
+        <p className="product-price"><span>Price</span> ${product.price}</p>
         <p className="product-description">{product.description}</p>
-        <button className="add-to-cart">ADD TO CART</button>
+        <button className="add-to-cart" onClick={addToCart}>ADD TO CART</button>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+    overflow-x: hidden;
 }
 .new-collection h1{
     text-transform: uppercase;

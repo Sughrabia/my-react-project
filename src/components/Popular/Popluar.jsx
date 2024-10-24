@@ -44,7 +44,7 @@ const NewCollection = ( props) => {
           .map((item) => (
             <div key={item._id} className='all_products-item'> {/* Use _id as the key */}
               <Link style={{textDecoration:'none'}} to={`/product/${item._id}`}>
-              <img src={`http://localhost:5000/${item.image}`} alt={item.name} className='item-img' />
+              <img src={`http://localhost:5000/${item.imageUrl.replace(/\\/g, '/')}`} alt={item.name} className='item-img' />
               <div className='all_products-detail'>
                 <h2 className='all_products-name'>{item.name}</h2>
                 <p className='all_products-price new'>Price: ${item.price}</p>

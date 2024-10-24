@@ -16,7 +16,7 @@ const CreateCustomPage = () => {
       const response = await axios.post('http://localhost:5000/customPage/admin/pages', { title, content, slug });
       setMessage(response.data.message);
       if (response.status === 200) {
-        navigate('/admin/custom-pages'); // Redirect to the custom pages list
+        navigate('/admin/custom-pages');
       }
     } catch (error) {
       setMessage('Error saving page');

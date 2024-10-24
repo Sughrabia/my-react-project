@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Dashboard.css';
-import { Home, Pages, Settings, Person, Category,  KeyboardArrowRight } from '@mui/icons-material';
+import { Home, Pages, Settings, Person, Category,  KeyboardArrowRight, ViewCarousel } from '@mui/icons-material';
 
 function Dashboard({ children }) {
   return (
@@ -34,6 +34,12 @@ function Dashboard({ children }) {
             <Link to="/product">products</Link>
             <KeyboardArrowRight className="Arrow-icon" />
           </li>
+          <li>
+            <ViewCarousel className="social-icon" />
+            <Link to="/banner">Banners</Link>
+            <KeyboardArrowRight className="Arrow-icon" />
+          </li>
+          
         </ul>
       </nav>
       <div className="content">

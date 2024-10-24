@@ -3,16 +3,15 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import './custompage.css'
 const EditCustomPage = () => {
-  const { slug } = useParams(); // Get the slug from the URL parameters
+  const { slug } = useParams(); 
   const [pageData, setPageData] = useState({ title: '', content: '', slug: '' });
   const navigate = useNavigate();
 
-  // Fetch existing page data to pre-fill the form
   useEffect(() => {
     const fetchPageData = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/customPage/pages/${slug}`);
-        setPageData(response.data); // Set the page data in state
+        setPageData(response.data);
       } catch (error) {
         console.error('Error fetching page data:', error);
       }
@@ -20,18 +19,18 @@ const EditCustomPage = () => {
     fetchPageData();
   }, [slug]);
 
-  // Handle form submission to update the page
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.put(`http://localhost:5000/customPage/edit-pages/${slug}`, pageData); // Use the correct update API
-      navigate('/custompages'); // Redirect to the custom pages management
+      navigate('/custompages');
     } catch (error) {
       console.error('Error updating page:', error);
     }
   };
 
-  // Handle input change
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPageData({ ...pageData, [name]: value });
@@ -61,7 +60,7 @@ const EditCustomPage = () => {
             value={pageData.slug}
             onChange={handleChange}
             required
-            readOnly // Make slug read-only or editable based on your requirements
+            readOnly 
           />
         </div>
         <div>
