@@ -1,0 +1,67 @@
+.order-table {
+    margin: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #f0f2f5;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 15px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f7f7f7;
+  }
+  
+  .status {
+    text-align: center;
+  }
+  
+  .status-label {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+  }
+  
+  .status-pending {
+    background-color: #ffe1e1;
+    color: #e74c3c;
+  }
+  
+  .status-completed {
+    background-color: #e1f5e1;
+    color: #2ecc71;
+  }
+  
+  .status-dispatch {
+    background-color: #d2e4ff;
+    color: #3498db;
+  }
+  
+  .action-button {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    color: #888;
+    cursor: pointer;
+  }
+  

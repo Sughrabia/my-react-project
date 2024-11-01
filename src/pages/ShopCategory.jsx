@@ -19,7 +19,7 @@ const ShopCategory = (props) => {
   }, [props.category]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/product') 
+    fetch('https://glamgrabbackend-dxah8u9g.b4a.run/product') 
       .then((response) => response.json())
       .then((data) => {
         setProducts(data); 
@@ -68,7 +68,7 @@ const ShopCategory = (props) => {
                 <Link style={{ textDecoration: 'none' }} to={`/product/${item._id}`}>
                   {item.imageUrl ? (
                     <img 
-                      src={`http://localhost:5000/${item.imageUrl.replace(/\\/g, '/')}`} 
+                      src={`https://glamgrabbackend-dxah8u9g.b4a.run/${item.imageUrl.replace(/\\/g, '/')}`} 
                       alt={item.name} 
                       className='item-img' 
                     />

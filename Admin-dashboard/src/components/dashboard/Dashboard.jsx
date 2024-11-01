@@ -11,7 +11,7 @@ function Dashboard({ children }) {
         <ul>
           <li>
             <Home className="social-icon" />
-            <Link to="/">Home</Link>
+            <Link to="/admin">Home</Link>
             <KeyboardArrowRight className="Arrow-icon" />
           </li>
           <li>
@@ -37,6 +37,11 @@ function Dashboard({ children }) {
           <li>
             <ViewCarousel className="social-icon" />
             <Link to="/banner">Banners</Link>
+            <KeyboardArrowRight className="Arrow-icon" />
+          </li>
+          <li>
+            <ViewCarousel className="social-icon" />
+            <Link to="/order">Order</Link>
             <KeyboardArrowRight className="Arrow-icon" />
           </li>
           

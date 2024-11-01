@@ -1,31 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import './cart.css';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { useCart } from '../../Context/CartContext';
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([]); 
+  const { cartItems} = useCart(); // Destructure from context
+  const [fetchedCartItems, setFetchedCartItems] = useState([]); // Rename state
 
   useEffect(() => {
-    fetch('http://localhost:5000/cart')
-      .then(response => response.json())
-      .then(data => setCartItems(data))
-      .catch(error => console.error('Error fetching cart data:', error));
+    // Fetch cart data if needed
+    const fetchCartData = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/cart');
+        if (!response.ok) {
+          throw new Error('Failed to fetch cart data');
+        }
+        const data = await response.json();
+        setFetchedCartItems(data);
+      } catch (error) {
+        console.error('Error fetching cart data:', error);
+      }
+    };
+
+    fetchCartData();
   }, []);
 
+  // Use fetchedCartItems or cartItems depending on your needs
+  const itemsToDisplay = fetchedCartItems.length > 0 ? fetchedCartItems : cartItems;
 
-  const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const subtotal = itemsToDisplay.reduce((acc, item) => acc + item.price * item.quantity, 0);
   const shipping = 20; 
   const total = subtotal + shipping;
 
-
-  const handleRemove = async(id) => {
+  const handleRemove = async (id) => {
     try {
       const response = await fetch(`http://localhost:5000/cart/remove/${id}`, {
         method: 'DELETE',
       });
 
       if (response.ok) {
-        setCartItems(cartItems.filter(item => item._id !== id));
+        setFetchedCartItems(itemsToDisplay.filter(item => item._id !== id));
+        // Optionally update context cartItems if you're using context for cart state
       } else {
         console.error('Error removing item from cart');
       }
@@ -39,10 +54,10 @@ const Cart = () => {
       <h1>Shopping Cart</h1>
       <div className="cart-content">
         <div className="cart-items">
-          {cartItems.length === 0 ? (
+          {itemsToDisplay.length === 0 ? (
             <p>Your cart is empty</p>
           ) : (
-            cartItems.map(item => (
+            itemsToDisplay.map(item => (
               <div className="cart-item" key={item._id}>
                 <img src={`/${item.imageUrl}`} alt={item.name} className="cart-item-image" />
                 <div className="cart-item-details">
@@ -65,7 +80,6 @@ const Cart = () => {
           <p>Total: USD ${total.toFixed(2)}</p>
           <input type="text" placeholder="Enter coupon code" className="coupon-input" />
           <Link to='/checkout'><button className="checkout-button">Checkout</button></Link>
-          
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ import Shop from './pages/Shop';
 import ShopCategory from './pages/ShopCategory';
 import Product from './pages/Product';
 import ProductDetails from './pages/ProductDetail';
-import Cart from './pages/cart/Cart';
+// import Cart from './components/checkout/Cart';
 import LoginSignup from './pages/LoginSignup';
 import Footer from './components/Footer/Footer';
 import About from './components/About/About';
@@ -15,11 +15,14 @@ import FAQ from './components/FAQ/FAQ';
 import Login from './pages/login';
 import PrivacyPolicy from './components/PrivacyPolicy/PrivacyPolicy';
 import NewCollection from './components/NewCollection/NewCollection';
-import Checkout from './components/checkout/Checkout';
+import OrderCheckout from './components/checkout/oderdetail';
+import { CartProvider } from './Context/CartContext';
+import CheckoutPage from './components/checkout/checkout';
 
 function App() {
   return (
     <div>
+      <CartProvider>
       <BrowserRouter>
         <Navbar />
         <Routes>
@@ -29,7 +32,7 @@ function App() {
           <Route path='/Kid' element={<ShopCategory category="Kid" />} />
           <Route path='/Product' element={<Product />} />
           <Route path="/product/:productId" element={<ProductDetails />} />
-          <Route path='/Cart' element={<Cart />} />
+          {/* <Route path='/Cart' element={<Cart />} /> */}
           <Route path='/Loginsignup' element={<LoginSignup />} />
           <Route path='/login' element={<Login/>}/>
           <Route path='/about-us' element={<About />} />
@@ -37,10 +40,12 @@ function App() {
           <Route path="/FAQ" element={<FAQ />} />
           <Route path='/privacy-policy' element={<PrivacyPolicy/>}/>
           <Route path='/NewCollection' element={<NewCollection/>}/>
-          <Route path='checkout'  element={<Checkout/>}/>
+          <Route path='/checkout'  element={<CheckoutPage/>}/>
+          <Route path='/orderdetails'  element={<OrderCheckout/>}/>
         </Routes>
         <Footer />
       </BrowserRouter>
+      </CartProvider>
     </div>
   );
 }
