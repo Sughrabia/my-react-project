@@ -25,7 +25,7 @@ const Navbar = () => {
         <Link to="/loginSignup">
           <button>Login </button>
         </Link>
-          <Link to='/Cart'><img src={cartIcon } alt='img' className='cart'/></Link>
+          <Link to='/checkout'><img src={cartIcon } alt='img' className='cart'/></Link>
           <div className='nav-cart-count'>0</div>
         </div>
 

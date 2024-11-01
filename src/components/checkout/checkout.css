@@ -1,71 +1,82 @@
-/* General Form Styling */
+/* orderdetail.css */
+
 .shipping-form {
-  width: 50%;
-  margin: 0 auto;
-  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
 .shipping-form h2 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.twofields {
-  display: flex;
-  gap: 30px; /* Spacing between two fields */
-}
-
-.form-group {
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-.form-group label {
-  display: block;
-  font-size: 1rem;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.form-group input,
-.form-group select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-.form-group.checkbox {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.form-group.checkbox input {
-  margin-right: 10px;
-}
-
-.btn-next {
-  width: 100%;
-  padding: 15px;
-  background-color: #000;
-  color: #fff;
+  font-size: 24px;
+  color: #333;
   text-align: center;
-  border: none;
-  font-size: 1.1rem;
-  cursor: pointer;
-  border-radius: 4px;
-  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.btn-next:hover {
-  background-color: #444;
+.shipping-form .form-group {
+  margin-bottom: 16px;
 }
-.checkout-left{
+
+.shipping-form label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.shipping-form input[type="text"],
+.shipping-form select {
+  width: 100%;
+  padding: 6px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.shipping-form input[type="text"]:focus,
+.shipping-form select:focus {
+  border-color: #e2a54a;
+}
+
+.shipping-form .twofields {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  gap: 16px;
+}
+
+.shipping-form .twofields .form-group {
+  flex: 1;
+}
+
+.shipping-form .btn-next {
+  width: 100%;
+  padding: 12px;
+  background-color: #e28e4a;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.shipping-form .btn-next:hover {
+  background-color: #b87f35;
+}
+
+.shipping-form .btn-next:active {
+  background-color: #905b2a;
+}
+
+@media (max-width: 600px) {
+  .shipping-form .twofields {
+    flex-direction: column;
+  }
 }

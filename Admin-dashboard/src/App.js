@@ -13,6 +13,7 @@ import EditCustomPage from './components/Custompages/EditCustomPage.jsx';
 import AdminBanner from './components/banner/Banner.jsx';
 import EditBanner from './components/banner/Editbanner.jsx';
 import Adminnavbar from './components/Adminnavbar/Adminnavbar.jsx';
+import OrderTable from './components/order/Order.jsx';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
       <Adminnavbar/>
       <Dashboard>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/admin" element={<Home />} />
           <Route path="/custompages" element={<CustomPage />} />
           <Route path="/create-custompage" element={<CreateCustomPage/>}/>
           <Route path='/edit-custompage/:slug' element={<EditCustomPage/>}/>
@@ -31,6 +32,7 @@ function App() {
           <Route path="/edit-product/:id" element={<EditProduct/>} />
           <Route path="/banner" element={<AdminBanner/>}/>
           <Route path='/banner/:bannerId' element={<EditBanner />} />
+          <Route path="/order" element={<OrderTable/>}/>
 
         </Routes>
       </Dashboard>
