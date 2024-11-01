@@ -8,7 +8,7 @@ const ManageUser = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await fetch('http://localhost:5000/user');
+                const response = await fetch('https://glamgrabbackend-dxah8u9g.b4a.run/user');
                 if (!response.ok) {
                     throw new Error(`Error: ${response.status}`);
                 }
@@ -25,7 +25,7 @@ const ManageUser = () => {
     const handleDelete = async (userId) => {
         if (window.confirm('Are you sure you want to delete this user?')) {
             try {
-                const response = await fetch(`http://localhost:5000/user/${userId}`, {
+                const response = await fetch(`https://glamgrabbackend-dxah8u9g.b4a.run/user/${userId}`, {
                     method: 'DELETE',
                 });
 

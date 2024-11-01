@@ -10,7 +10,7 @@ const EditCustomPage = () => {
   useEffect(() => {
     const fetchPageData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/customPage/pages/${slug}`);
+        const response = await axios.get(`https://glamgrabbackend-dxah8u9g.b4a.run/customPage/pages/${slug}`);
         setPageData(response.data);
       } catch (error) {
         console.error('Error fetching page data:', error);
@@ -23,7 +23,7 @@ const EditCustomPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/customPage/edit-pages/${slug}`, pageData); // Use the correct update API
+      await axios.put(`https://glamgrabbackend-dxah8u9g.b4a.run/customPage/edit-pages/${slug}`, pageData); // Use the correct update API
       navigate('/custompages');
     } catch (error) {
       console.error('Error updating page:', error);
