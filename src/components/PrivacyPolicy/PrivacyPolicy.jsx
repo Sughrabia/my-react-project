@@ -13,10 +13,10 @@ const PrivacyPolicy = () => {
         let response;
         if (slug) {
           // Fetch a specific Privacy Policy page by slug
-          response = await axios.get(`http://localhost:5000/customPage/pages/${slug}`);
+          response = await axios.get(`https://glamgrabbackend-dxah8u9g.b4a.run/customPage/pages/${slug}`);
         } else {
           // Fetch the default Privacy Policy page or a list
-          response = await axios.get('http://localhost:5000/customPage/pages/privacy-policy');  // Adjust endpoint accordingly
+          response = await axios.get('https://glamgrabbackend-dxah8u9g.b4a.run/customPage/pages/privacy-policy');  // Adjust endpoint accordingly
         }
         setPage(response.data);
       } catch (error) {
