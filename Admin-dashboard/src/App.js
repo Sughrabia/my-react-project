@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './components/dashboard/Dashboard.jsx';
 import Home from './components/Home/Home.jsx';
 import CustomPage from './components/Custompages/CustomPage.jsx';
-import Settings from './components/Setting.jsx';
+import Settings from './components/setting/Setting.jsx';
 import ManageUser from './components/manageUser/ManageUser.jsx';
 import Product from './components/product/Product.jsx';
 import CreateProduct from './components/product/CreateProduct.jsx'
