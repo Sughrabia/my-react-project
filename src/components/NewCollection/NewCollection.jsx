@@ -3,12 +3,12 @@ import './NewCollection.css';
 import { Link } from 'react-router-dom';
 
 const NewCollection = () => {
-  const [all_products, setProducts] = useState([]); // Initialize as an empty array
-  const [loading, setLoading] = useState(true); // To handle loading state
+  const [all_products, setProducts] = useState([]); 
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     // Fetch products from the backend API
-    fetch('http://localhost:5000/product')
+    fetch('https://glamgrabbackend-dxah8u9g.b4a.run/product')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -16,17 +16,17 @@ const NewCollection = () => {
         return response.json();
       })
       .then((data) => {
-        setProducts(data); // Update the state with the products fetched
-        setLoading(false);  // Stop loading
+        setProducts(data);
+        setLoading(false); 
       })
       .catch((error) => {
         console.error('Error fetching products:', error);
-        setLoading(false); // Stop loading on error as well
+        setLoading(false); 
       });
-  }, []); // Remove setProducts from the dependency array
+  }, []); 
 
   if (loading) {
-    return <p>Loading products...</p>; // Show loading message until data is fetched
+    return <p>Loading products...</p>; 
   }
 
   return (
@@ -41,7 +41,7 @@ const NewCollection = () => {
           all_products.map((item) => (
             <div key={item._id} className='all_products-item'> {/* Use _id as the key */}
               <Link  style={{textDecoration:'none'}} to={`/product/${item._id}`}>
-              <img  src={`http://localhost:5000/${item.imageUrl.replace(/\\/g, '/')}`} alt={item.name} className='item-img' />
+              <img  src={`https://glamgrabbackend-dxah8u9g.b4a.run/${item.imageUrl.replace(/\\/g, '/')}`} alt={item.name} className='item-img' />
               <div className='all_products-detail'>
                 <h2 className='all_products-name'>{item.name}</h2>
                 <p className='all_products-price new'>Price: ${item.price}</p>

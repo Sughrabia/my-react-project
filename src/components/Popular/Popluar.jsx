@@ -4,12 +4,12 @@ import './Popular.css'
 
 
 const NewCollection = ( props) => {
-  const [all_products, setProducts] = useState([]); // Initialize as an empty array
-  const [loading, setLoading] = useState(true); // To handle loading state
+  const [all_products, setProducts] = useState([]); 
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Fetch products from the backend API
-    fetch('http://localhost:5000/product')
+    fetch('https://glamgrabbackend-dxah8u9g.b4a.run/product')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -17,17 +17,17 @@ const NewCollection = ( props) => {
         return response.json();
       })
       .then((data) => {
-        setProducts(data); // Update the state with the products fetched
-        setLoading(false);  // Stop loading
+        setProducts(data); 
+        setLoading(false);  
       })
       .catch((error) => {
         console.error('Error fetching products:', error);
-        setLoading(false); // Stop loading on error as well
+        setLoading(false); 
       });
-  }, []); // Remove setProducts from the dependency array
+  }, []);
 
   if (loading) {
-    return <p>Loading products...</p>; // Show loading message until data is fetched
+    return <p>Loading products...</p>; 
   }
 
   return (
@@ -38,11 +38,11 @@ const NewCollection = ( props) => {
       </div>
 
       <div className='shopcategory-products'>
-        {all_products.length > 0 ? ( // Check if there are products to display
+        {all_products.length > 0 ? ( 
           all_products
           .filter((item) => item.category === props.category)
           .map((item) => (
-            <div key={item._id} className='all_products-item'> {/* Use _id as the key */}
+            <div key={item._id} className='all_products-item'> 
               <Link style={{textDecoration:'none'}} to={`/product/${item._id}`}>
               <img src={`http://localhost:5000/${item.imageUrl.replace(/\\/g, '/')}`} alt={item.name} className='item-img' />
               <div className='all_products-detail'>
@@ -53,7 +53,7 @@ const NewCollection = ( props) => {
             </div>
           ))
         ) : (
-          <p>No products available.</p> // Handle case where no products are found
+          <p>No products available.</p> 
         )}
       </div>
     </div>
