@@ -52,7 +52,7 @@ const LoginSignup = () => {
     if (!isValid) {
       return;
     }
-    const response = await fetch("http://localhost:5000/login/api/signup", {
+    const response = await fetch("https://loginserver-2s23nyu0.b4a.run/login/api/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

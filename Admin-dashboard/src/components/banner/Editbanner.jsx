@@ -54,7 +54,7 @@ const EditBanner = () => {
     }
     formDataToSend.append('category', formData.category);
   
-    const response = await fetch(`http://localhost:5000/banner/edit/${formData._id}`, {
+    const response = await fetch(`https://customizeproserver-ez6b5n9b.b4a.run/banner/edit/${formData._id}`, {
       method: 'PUT',
       body: formDataToSend,
     });

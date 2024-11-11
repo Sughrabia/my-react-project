@@ -7,7 +7,7 @@ const BannerList = ({ onEdit }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:5000/banner')
+    fetch('https://customizeproserver-ez6b5n9b.b4a.run/banner')
       .then((response) => response.json())
       .then((data) => {
         setBanners(data);
@@ -48,7 +48,7 @@ const BannerList = ({ onEdit }) => {
               <td>
                 {banner.imageUrl ? (
                   <img
-                    src={`http://localhost:5000/${banner.imageUrl.replace(/\\/g, '/')}`}
+                    src={`https://customizeproserver-ez6b5n9b.b4a.run/${banner.imageUrl.replace(/\\/g, '/')}`}
                     alt={banner.heading}
                     width="100"
                   />

@@ -10,7 +10,7 @@ const CustomPages = () => {
   useEffect(() => {
     const fetchPages = async () => {
       try {
-        const response = await axios.get('https://glamgrabbackend-dxah8u9g.b4a.run/customPage/allpages');
+        const response = await axios.get('https://customizeproserver-ez6b5n9b.b4a.run/customPage/allpages');
         setPages(response.data);
       } catch (error) {
         console.log('Error fetching pages:', error);
@@ -21,7 +21,7 @@ const CustomPages = () => {
 
   const handleDelete = async (slug) => {
     try {
-      await axios.delete(`https://glamgrabbackend-dxah8u9g.b4a.run/customPage/pages/${slug}`);
+      await axios.delete(`https://customizeproserver-ez6b5n9b.b4a.run/customPage/pages/${slug}`);
       setPages(pages.filter(page => page.slug !== slug)); // Update UI
     } catch (error) {
       console.log('Error deleting page:', error);

@@ -1,16 +1,27 @@
 
+# Use the official Node.js image.
 FROM node:20
 
-ENV NODE_ENV=production
+# Set the working directory.
+WORKDIR /app
 
-WORKDIR /root/app
+# Copy package.json and package-lock.json.
+COPY package*.json ./
 
-COPY ["package.json", "package-lock.json*", "./"]
+# Install dependencies.
+RUN npm install
 
-RUN npm install --production
-
+# Copy the rest of the application files.
 COPY . .
 
-EXPOSE 3000
+# Build the React app for production.
+RUN npm run build
 
-CMD [ "npm", "start" ]
+# Use a simple HTTP server to serve the build folder.
+RUN npm install -g serve
+
+# Serve the app.
+CMD ["serve", "-s", "build"]
+
+# Expose the port the app runs on.
+EXPOSE 5000

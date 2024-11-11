@@ -13,10 +13,10 @@ const FAQ = () => {
         let response;
         if (slug) {
           // Fetch a specific FAQ page by slug
-          response = await axios.get(`https://glamgrabbackend-dxah8u9g.b4a.run/customPage/pages/${slug}`);
+          response = await axios.get(`https://customizeproserver-ez6b5n9b.b4a.run/customPage/pages/${slug}`);
         } else {
           // Fetch the default FAQ page or FAQ list
-          response = await axios.get('https://glamgrabbackend-dxah8u9g.b4a.run/customPage/pages/FAQ');  // Adjust endpoint accordingly
+          response = await axios.get('https://customizeproserver-ez6b5n9b.b4a.run/customPage/pages/FAQ');  // Adjust endpoint accordingly
         }
         setPage(response.data);
       } catch (error) {
