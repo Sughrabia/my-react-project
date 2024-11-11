@@ -11,7 +11,7 @@ const Cart = () => {
     // Fetch cart data if needed
     const fetchCartData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/cart');
+        const response = await fetch('https://glamgrabbackend-dxah8u9g.b4a.run/cart');
         if (!response.ok) {
           throw new Error('Failed to fetch cart data');
         }
@@ -34,7 +34,7 @@ const Cart = () => {
 
   const handleRemove = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/cart/remove/${id}`, {
+      const response = await fetch(`https://glamgrabbackend-dxah8u9g.b4a.run/cart/remove/${id}`, {
         method: 'DELETE',
       });
 

@@ -12,7 +12,7 @@ function Settings() {
   // Fetch settings from the backend
   const fetchSettings = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/setting/get');
+      const response = await axios.get('https://customizeproserver-ez6b5n9b.b4a.run/setting/get');
       setTitle(response.data.title);
       setName(response.data.name);
       setShowName(response.data.showName);
@@ -36,7 +36,7 @@ function Settings() {
     if (faviconFile) formData.append('favicon', faviconFile);
 
     try {
-      const response = await axios.put('http://localhost:5000/setting/update', formData, {
+      const response = await axios.put('https://customizeproserver-ez6b5n9b.b4a.run/setting/update', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       console.log('Update response:', response.data);

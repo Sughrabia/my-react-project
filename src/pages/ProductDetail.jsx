@@ -18,7 +18,7 @@ const ProductDetails = () => {
     };
 
     // API call to add product to cart
-    fetch('http://localhost:5000/cart/add', {
+    fetch('https://glamgrabbackend-dxah8u9g.b4a.run/cart/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/product/${productId}`);
+        const response = await fetch(`https://glamgrabbackend-dxah8u9g.b4a.run/product/${productId}`);
         if (!response.ok) {
           throw new Error('Failed to fetch product details');
         }
@@ -74,7 +74,7 @@ const ProductDetails = () => {
   return (
     <div className="product-details">
       <div className="main-image-container">
-        <img src={`http://localhost:5000/${normalizedimageUrl}`} alt={product.name} className="main-image" />
+        <img src={`https://glamgrabbackend-dxah8u9g.b4a.run/${normalizedimageUrl}`} alt={product.name} className="main-image" />
       </div>
       <div className="product-info">
         <h1 style={{textTransform:'capitalize'}} className="product-title">{product.name}</h1>

@@ -10,7 +10,7 @@ const ShopCategory = (props) => {
 
   // Fetch banners by category
   useEffect(() => {
-    fetch(`https://glamgrabbackend-dxah8u9g.b4a.run/banner?category=${props.category}`) 
+    fetch(`https://customizeproserver-ez6b5n9b.b4a.run/banner?category=${props.category}`) 
       .then((response) => response.json())
       .then((data) => {
         setBanners(data);
@@ -46,7 +46,7 @@ const ShopCategory = (props) => {
               <div> 
                 {banner.imageUrl ? (
                 <img 
-                  src={`https://glamgrabbackend-dxah8u9g.b4a.run/${banner.imageUrl.replace(/\\/g, '/')}`} 
+                  src={`https://customizeproserver-ez6b5n9b.b4a.run/${banner.imageUrl.replace(/\\/g, '/')}`} 
                   className="banner-img" 
                   alt={banner.heading} 
                 />

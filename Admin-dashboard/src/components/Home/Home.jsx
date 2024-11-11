@@ -15,8 +15,8 @@ const AdminDashboard = () => {
     const fetchStats = async () => {
       try {
         const [usersRes, productsRes, pagesRes, bannersRes] = await Promise.all([
-          fetch('https://glamgrabbackend-dxah8u9g.b4a.run/banner/count'),
-          fetch('https://glamgrabbackend-dxah8u9g.b4a.run/user/count'),
+          fetch('https://customizeproserver-ez6b5n9b.b4a.run/banner/count'),
+          fetch('https://customizeproserver-ez6b5n9b.b4a.run/user/count'),
           fetch('https://glamgrabbackend-dxah8u9g.b4a.run/product/count'),
           fetch('https://glamgrabbackend-dxah8u9g.b4a.run/count'),
         ]);

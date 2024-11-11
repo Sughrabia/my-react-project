@@ -13,7 +13,7 @@ const CreateCustomPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://glamgrabbackend-dxah8u9g.b4a.run/customPage/admin/pages', { title, content, slug });
+      const response = await axios.post('https://customizeproserver-ez6b5n9b.b4a.run/customPage/admin/pages', { title, content, slug });
       setMessage(response.data.message);
       if (response.status === 200) {
         navigate('/admin/custom-pages');
