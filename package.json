@@ -2,7 +2,7 @@
   "name": "testing",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://containers.back4app.com/apps/abefed68-334a-427e-bc03-6c29188666cb",
+  "proxy": "https://glamgrabbackend-dxah8u9g.b4a.run",
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
