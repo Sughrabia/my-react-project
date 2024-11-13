@@ -1,93 +1,64 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import './order.css';
 
-const OrderTable = () => {
+const OrderHistory = () => {
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchOrders = async () => {
+    const fetchOrderHistory = async () => {
       try {
-        const response = await fetch('http://localhost:5000/shipping/orders');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-
-        if (Array.isArray(data)) {
-          setOrders(data);
-        } else {
-          throw new Error('Data format is incorrect');
-        }
+        const response = await axios.get('http://localhost:5000/order');
+        setOrders(response.data);
       } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false); // Set loading to false after data is fetched
+        setError('Failed to fetch order history');
+        console.error('Error fetching orders:', error);
       }
     };
 
-    fetchOrders();
+    fetchOrderHistory();
   }, []);
 
-  if (loading) {
-    return <div>Loading orders...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  const handleOkClick = () => {
+    navigate('/');
+  };
 
   return (
-    <div className="order-table">
-      <div className="table-header">
-        <h2>All Orders</h2>
-        <div className="filters">
-          {/* Optional: Add date range and status filters here */}
-        </div>
-      </div>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Price</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {orders.length > 0 ? (
-            orders.map((order) => (
-              <tr key={order.orderId} className={`status-${order.status?.toLowerCase() || 'unknown'}`}>
-                <td>#{order.orderId || 'N/A'}</td>
-                <td>{order.name || 'No Name'}</td>
-                <td>{order.address || 'No Address'}</td>
-                <td>${order.price?.toFixed(2) || '0.00'}</td>
-                <td className="status">
-                  <span className={`status-label ${order.status?.toLowerCase() || 'unknown'}`}>
-                    {order.status || 'Unknown'}
-                  </span>
-                </td>
-                <td>
-                  <button className="action-button">Actions</button>
-                </td>
-              </tr>
-            ))
-          ) : (
+    <div className="order-history-container">
+      <h2 className="order-history-title">Order History</h2>
+      {error && <div className="error-message">{error}</div>}
+      {orders.length === 0 ? (
+        <p>No orders found.</p>
+      ) : (
+        <table className="order-table">
+          <thead>
             <tr>
-              <td colSpan="6">No orders available</td>
+              <th>Order ID</th>
+              <th>Total Amount</th>
+              <th>Payment Method</th>
+              <th>Status</th>
             </tr>
-          )}
-        </tbody>
-      </table>
-
-      <div className="pagination">
-        {/* Add pagination controls here if needed */}
+          </thead>
+          <tbody>
+            {orders.map((order) => (
+              <tr key={order._id}>
+                <td>{order._id}</td>
+                <td>${order.totalAmount}</td>
+                <td>{order.paymentMethod}</td>
+                <td>{order.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+      <div className="order-actions">
+        <button className="ok-button" onClick={handleOkClick}>OK</button>
       </div>
     </div>
   );
 };
 
-export default OrderTable;
+export default OrderHistory;

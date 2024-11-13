@@ -15,9 +15,11 @@ import FAQ from './components/FAQ/FAQ';
 import Login from './pages/login';
 import PrivacyPolicy from './components/PrivacyPolicy/PrivacyPolicy';
 import NewCollection from './components/NewCollection/NewCollection';
-import OrderCheckout from './components/checkout/oderdetail';
+// import OrderCheckout from './components/checkout/oderdetail';
 import { CartProvider } from './Context/CartContext';
-import CheckoutPage from './components/checkout/checkout';
+// import CheckoutPage from './components/checkout/shippingdetail';
+// import Shippingdetail from './components/checkout/shippingdetail';
+import Checkout from './components/checkout/checkout';
 
 function App() {
   return (
@@ -29,10 +31,9 @@ function App() {
           <Route path='/' element={<Shop />} />
           <Route path='/Men' element={<ShopCategory category="Men" />} />
           <Route path='/Women' element={<ShopCategory category="Women" />} />
-          <Route path='/Kid' element={<ShopCategory category="Kid" />} />
+          <Route path='/Kid' element={<ShopCategory category="kid" />} />
           <Route path='/Product' element={<Product />} />
           <Route path="/product/:productId" element={<ProductDetails />} />
-          {/* <Route path='/Cart' element={<Cart />} /> */}
           <Route path='/Loginsignup' element={<LoginSignup />} />
           <Route path='/login' element={<Login/>}/>
           <Route path='/about-us' element={<About />} />
@@ -40,12 +41,11 @@ function App() {
           <Route path="/FAQ" element={<FAQ />} />
           <Route path='/privacy-policy' element={<PrivacyPolicy/>}/>
           <Route path='/NewCollection' element={<NewCollection/>}/>
-          <Route path='/checkout'  element={<CheckoutPage/>}/>
-          <Route path='/orderdetails'  element={<OrderCheckout/>}/>
+          <Route path='/orderdetails'  element={<Checkout/>}/>
         </Routes>
         <Footer />
       </BrowserRouter>
-      </CartProvider>
+      </CartProvider>,
     </div>
   );
 }

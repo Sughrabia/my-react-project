@@ -1,11 +1,9 @@
 .hero {
-    display: flex;
-    height: auto;
     background-image: linear-gradient(to bottom, rgba(250, 115, 5, 0.5), rgba(255, 255, 255, 0.5));
-    /* box-shadow: 0 1px 3px -2px black; */
-    align-items: center;
+    width: 100%;                      
     padding: 20px;
-    flex-wrap: wrap; 
+    display: flex;
+    color: #080808;
 }
 
 .hero-left {
@@ -20,7 +18,7 @@
 
 .hero-left h2 {
     margin-top: 20px; 
-    font-size: 2rem;
+    font-size: 5rem;
 }
 
 .hero-left p {

@@ -1,77 +1,61 @@
-// CheckoutPage.jsx
 import React, { useState } from 'react';
-import ShippingForm from './ShippingForm';
 import Cart from './Cart';
 import { useCart } from '../../Context/CartContext';
-import { useNavigate } from 'react-router-dom';
+import ShippingDetail from './shippingdetail';
+import axios from 'axios';
+import './cart.css'
 
-const CheckoutPage = () => {
-  const { cartItems, clearCart } = useCart();
-  const [shippingData, setShippingData] = useState(null);
-  const [currentStep, setCurrentStep] = useState(1); // 1 for Cart, 2 for ShippingForm
-  const navigate = useNavigate();
+const Checkout = () => {
+  const { cartItems, clearCart } = useCart(); // For cart data
+  const [shippingDetails, setShippingDetails] = useState({}); // For shipping details
+  const [step, setStep] = useState(1); // 1 for Cart, 2 for ShippingDetail
 
-  // Function to collect shipping data from the ShippingForm component
-  const handleShippingData = (data) => {
-    setShippingData(data);
-    console.log('Shipping data:', data);
-    setCurrentStep(1); // Move back to Cart or next step if needed
+  const handleCartUpdate = (items) => {
+    clearCart(items);
   };
 
-  // Function to handle the checkout submission
-  const handleCheckout = async () => {
-    if (!shippingData) {
-      alert("Please complete the shipping form.");
-      return;
-    }
+  const handleShippingUpdate = (details) => {
+    setShippingDetails(details);
+  };
 
-    const orderData = {
-      shippingDetails: shippingData,
-      cartItems: cartItems,
-      total: cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0) + 20, // Calculate total with shipping
-    };
-
+  const handleSubmit = async () => {
     try {
-      const response = await fetch('http://localhost:5000/shipping/order', { // Make sure this URL is correct
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(orderData), // This should be a valid JSON string
-      });
-
-      if (response.ok) {
-        alert('Order placed successfully!');
-        clearCart();
-        navigate('/orderdetails'); // Redirect after order
-      } else {
-        alert('Failed to place order.');
-      }
+      const data = {
+        cartItems,
+        shippingDetails,
+      };
+      const response = await axios.post('http://localhost:5000/order/detail', data);
+      console.log('Order created:', response.data);
+      clearCart();
     } catch (error) {
-      console.error('Error placing order:', error);
+      console.error('Error creating order:', error);
     }
-};
-  const handleNextStep = () => {
-    setCurrentStep(2); // Move to the next step (ShippingForm)
+  };
+
+  const handleCheckoutClick = () => {
+    setStep(2); // Move to ShippingDetail step
   };
 
   return (
     <div>
-      {currentStep === 1 && (
-        <div>
-          <Cart />
-          <button onClick={handleNextStep}>Next</button>
+      {step === 1 && (
+        <div >
+          <Cart onCartUpdate={handleCartUpdate} />
+          <div className="button-container">
+          <button className="checkout-button" onClick={handleCheckoutClick}>Checkout</button>
+          </div>
+          
         </div>
       )}
-      {currentStep === 2 && (
+
+      {step === 2 && (
         <div>
-          <h1>Checkout</h1>
-          <ShippingForm onSubmit={handleShippingData} />
-          <button onClick={handleCheckout}>Place Order</button>
+          <ShippingDetail onShippingUpdate={handleShippingUpdate} />
+          <button onClick={handleSubmit}>Place Order</button>
         </div>
       )}
     </div>
   );
 };
 
-export default CheckoutPage;
+export default Checkout;
