@@ -15,11 +15,9 @@ import FAQ from './components/FAQ/FAQ';
 import Login from './pages/login';
 import PrivacyPolicy from './components/PrivacyPolicy/PrivacyPolicy';
 import NewCollection from './components/NewCollection/NewCollection';
-// import OrderCheckout from './components/checkout/oderdetail';
 import { CartProvider } from './Context/CartContext';
-// import CheckoutPage from './components/checkout/shippingdetail';
-// import Shippingdetail from './components/checkout/shippingdetail';
 import Checkout from './components/checkout/checkout';
+import Verification from './pages/verification';
 
 function App() {
   return (
@@ -42,6 +40,7 @@ function App() {
           <Route path='/privacy-policy' element={<PrivacyPolicy/>}/>
           <Route path='/NewCollection' element={<NewCollection/>}/>
           <Route path='/orderdetails'  element={<Checkout/>}/>
+          <Route path='/verify/:token'  element={<Verification/>}/>
         </Routes>
         <Footer />
       </BrowserRouter>
