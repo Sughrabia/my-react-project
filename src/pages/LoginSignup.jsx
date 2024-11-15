@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import "./css/LoginSignup.css";
 import { Link } from 'react-router-dom';
 
-
-
 const LoginSignup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -11,7 +9,6 @@ const LoginSignup = () => {
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -30,7 +27,6 @@ const LoginSignup = () => {
 
     let isValid = true;
 
-  
     if (!name) {
       setNameError("Name is required");
       isValid = false;
@@ -52,6 +48,7 @@ const LoginSignup = () => {
     if (!isValid) {
       return;
     }
+
     const response = await fetch("https://loginserver-2s23nyu0.b4a.run/login/api/signup", {
       method: "POST",
       headers: {
@@ -62,7 +59,7 @@ const LoginSignup = () => {
 
     const data = await response.json();
     if (response.ok) {
-      alert('Registered successful!');
+      alert('Registered successfully! Please check your email to verify your account.');
       setName(""); 
       setEmail(""); 
       setPassword("");
@@ -113,7 +110,7 @@ const LoginSignup = () => {
           </div>
           <button type="submit">Continue</button>
         </form>
-        <p>already have an account? <Link style={{textDecoration:'none'}} to='/login'><span>login here</span></Link></p>
+        <p>Already have an account? <Link style={{textDecoration:'none'}} to='/login'><span>Login here</span></Link></p>
       </div>
     </div>
   );
