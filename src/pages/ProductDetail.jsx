@@ -68,13 +68,22 @@ const ProductDetails = () => {
     return <p>No product found.</p>;
   }
 
-  // Fixing the image URL path for browser compatibility
-  const normalizedimageUrl = product.imageUrl.replace(/\\/g, '/');
+  console.log('Raw Image URL:', product.imageUrl);
+  const normalizedimageUrl = product.imageUrl?.replace(/\\/g, '/') || '';
+  console.log('Normalized Image URL:', normalizedimageUrl);
 
   return (
     <div className="product-details">
       <div className="main-image-container">
-        <img src={`https://glamgrabbackend-dxah8u9g.b4a.run/${normalizedimageUrl}`} alt={product.name} className="main-image" />
+        {normalizedimageUrl ? (
+          <img
+            src={normalizedimageUrl}
+            alt={product.name}
+            className="main-image"
+          />
+        ) : (
+          <p>Image not available</p>
+        )}
       </div>
       <div className="product-info">
         <h1 style={{textTransform:'capitalize'}} className="product-title">{product.name}</h1>
