@@ -84,7 +84,7 @@ const ShopCategory = (props) => {
                     <img
                       src={normalizedimageUrl}
                       alt={item.name}
-                      className="item-img"
+                      className="shop-item-img"
                     />
                   ) : (
                     <p>No image available</p>

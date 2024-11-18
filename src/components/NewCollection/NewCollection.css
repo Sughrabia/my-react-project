@@ -36,7 +36,7 @@
     background-color: rgb(253, 253, 252);
     text-align: center;
 }
-.collection-item img{
+.c-item-img{
     object-fit: cover;
     height: 300px;
     width: 100%;

@@ -53,7 +53,7 @@ const NewCollection = () => {
                     <img
                       src={normalizedimageUrl}
                       alt={item.name}
-                      className="item-img"
+                      className="c-item-img"
                     />
                   ) : (
                     <p>Image not available</p>

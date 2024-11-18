@@ -71,7 +71,7 @@
     background-color: rgb(253, 253, 252);
     text-align: center;
 }
-.all_products-item img{
+.shop-item-img{
     object-fit: cover;
     height: 300px;
     width: 100%;
