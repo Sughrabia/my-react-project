@@ -5,10 +5,10 @@ import ShippingDetail from './shippingdetail';
 import axios from 'axios';
 import './cart.css'
 
-const Checkout = () => {
-  const { cartItems, clearCart } = useCart(); // For cart data
-  const [shippingDetails, setShippingDetails] = useState({}); // For shipping details
-  const [step, setStep] = useState(1); // 1 for Cart, 2 for ShippingDetail
+const Checkoutpage = () => {
+  const { cartItems, clearCart } = useCart(); 
+  const [shippingDetails, setShippingDetails] = useState({}); 
+  const [step, setStep] = useState(1); 
 
   const handleCartUpdate = (items) => {
     clearCart(items);
@@ -58,4 +58,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default Checkoutpage;
