@@ -38,10 +38,12 @@ const CreateProductPage = () => {
     data.append('price', newProduct.price);
     data.append('description', newProduct.description);
     
+    // Sending the main image file to Cloudinary
     if (imageFile) {
       data.append('imageUrl', imageFile); 
     }
 
+    // Sending additional images to Cloudinary
     if (additionalImages.length > 0) {
       additionalImages.forEach((file) => {
         data.append('additionalImages', file); 
@@ -55,6 +57,8 @@ const CreateProductPage = () => {
       });
 
       if (response.ok) {
+        // const data\\\\ = await response.json();
+        // You can now use result.savedProduct to access the product and its Cloudinary URLs
         alert('Product created successfully');
         setNewProduct({
           name: '',
