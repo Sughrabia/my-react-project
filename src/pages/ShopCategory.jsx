@@ -71,8 +71,8 @@ const ShopCategory = (props) => {
         {all_products
           .filter((item) => item.category === props.category)
           .map((item) => {
-            // Normalize the image URL for the product
-            const normalizedimageUrl = item.imageUrl?.replace(/\\/g, "/") || "";
+            // Ensure that the backend only returns the image ID and not the full URL
+            const normalizedImageUrl = item.imageUrl?.replace(/\\/g, "/") || "";
 
             return (
               <div key={item._id} className="all_products-item">
@@ -80,9 +80,9 @@ const ShopCategory = (props) => {
                   style={{ textDecoration: "none" }}
                   to={`/product/${item._id}`}
                 >
-                  {normalizedimageUrl ? (
+                  {normalizedImageUrl ? (
                     <img
-                      src={normalizedimageUrl}
+                      src={`https://res.cloudinary.com/dpcoepo9y/image/upload/${normalizedImageUrl}`}
                       alt={item.name}
                       className="shop-item-img"
                     />

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Navbar.css'
 import cartIcon from '../assets/cart.png';
-import logo from '../assets/logo.avif';
+import logo from '../assets/logo.png';
 import { Link } from 'react-router-dom';
 
 

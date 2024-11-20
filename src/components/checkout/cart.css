@@ -1,64 +1,137 @@
+/* Base Styles */
 .cart-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.cart-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Added gap for spacing between items */
+}
+
+.cart-items {
+  width: 70%;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Center align items vertically */
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+  flex-wrap: wrap; /* Allow items to wrap for smaller screens */
+}
+
+.cart-item-image {
+  margin-top: 10px;
+  width: 100px;
+  height: 100px;
+  object-fit: cover; /* Ensure images maintain aspect ratio */
+}
+
+.cart-item-details {
+  flex: 1;
+  margin-left: 20px;
+  min-width: 200px; /* Ensures details do not shrink too much */
+}
+
+.cart-summary {
+  width: 25%;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.coupon-input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.checkout-button {
+  width: 100%; /* Set width to full for smaller screens */
+  max-width: 300px; /* Limit max size for larger screens */
+  padding: 15px;
+  background-color: #ee8e34;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 50px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.checkout-button:hover {
+  background-color: #f18928;
+}
+
+/* Responsive Adjustments */
+
+/* For tablets and small desktops */
+@media (max-width: 1024px) {
   .cart-content {
-    display: flex;
-    justify-content: space-between;
+      flex-direction: column; /* Stack items vertically */
   }
-  
-  .cart-items {
-    width: 70%;
-  }
-  
-  .cart-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .cart-item-image {
-    margin-top: 31px;
-    width: 100px;
-    height: 100px;
-  }
-  
-  .cart-item-details {
-    flex: 1;
-    margin-left: 20px;
-  }
-  
+
+  .cart-items, 
   .cart-summary {
-    width: 25%;
-    padding: 20px;
-    border: 1px solid #ccc;
+      width: 100%; /* Full width for stacked layout */
+      margin-bottom: 20px;
   }
-  
-  .coupon-input {
-    width: 92%;
-    padding: 10px;
-    margin: 10px 0;
+
+  .cart-item {
+      flex-direction: column; /* Stack item content */
+      align-items: flex-start; /* Align items to the left */
+      gap: 10px;
   }
-  
-  
-  .button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px; /* Add spacing if needed */
+
+  .cart-item-details {
+      margin-left: 0;
   }
-  
+
   .checkout-button {
-    width: 40%;
-    padding: 15px;
-    background-color: #ee8e34;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    text-align: center;
-    margin-bottom: 50px;
-    border-radius: 5px;
+      width: 80%; /* Reduce button width for smaller screens */
   }
-  
+}
+
+/* For mobile devices */
+@media (max-width: 768px) {
+  .cart-item-image {
+      width: 80px; /* Reduce image size */
+      height: 80px;
+  }
+
+  .cart-item-details {
+      font-size: 14px; /* Adjust font size */
+  }
+
+  .checkout-button {
+      width: 100%; /* Full width button */
+  }
+}
+
+/* For extra small screens */
+@media (max-width: 480px) {
+  .cart-item {
+      gap: 5px; /* Reduce spacing */
+  }
+
+  .cart-item-details {
+      font-size: 12px; /* Smaller text */
+  }
+
+  .checkout-button {
+      width: 100%; /* Full width for smaller screens */
+      padding: 12px; /* Adjust padding */
+  }
+}

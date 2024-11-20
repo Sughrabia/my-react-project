@@ -1,9 +1,9 @@
+/* Base Styles */
 .loginsignup-page {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 100px 0px;
-    
+    padding: 100px 0;
 }
 
 .loginsignup-container {
@@ -42,10 +42,16 @@ form button {
     border: none;
     cursor: pointer;
     color: white;
-    margin: 20px 0px 50px 0px;
+    margin: 20px 0 50px 0;
+    transition: background-color 0.3s ease-in-out;
+}
+
+form button:hover {
+    background-color: #e53935;
 }
 
 .loginsignup-container p {
+    text-align: center;
     gap: 20px;
     text-transform: capitalize;
 }
@@ -53,6 +59,11 @@ form button {
 .loginsignup-container p span {
     color: red;
     font-weight: 500;
+    cursor: pointer;
+}
+
+.loginsignup-container p span:hover {
+    color: #fc7777;
 }
 
 .errormessage {
@@ -63,14 +74,6 @@ form button {
     margin-top: -20px;
 }
 
-.loginsignup-container button:hover {
-    background-color: #e53935;
-}
-
-.loginsignup-container p span:hover {
-    color: #fc7777;
-}
-
 /* Responsive Design */
 
 /* For tablets and smaller desktops */
@@ -78,6 +81,10 @@ form button {
     .loginsignup-container {
         width: 90%;
         padding: 15px;
+    }
+
+    .loginsignup-fields {
+        width: 100%;
     }
 
     .loginsignup-content, form button {
@@ -92,6 +99,10 @@ form button {
         padding: 10px;
     }
 
+    .loginsignup-fields {
+        gap: 15px;
+    }
+
     .loginsignup-content, form button {
         width: 100%;
         font-size: 16px;
@@ -102,6 +113,10 @@ form button {
     }
 
     .loginsignup-container p {
-        text-align: center;
+        font-size: 14px;
+    }
+
+    .errormessage {
+        font-size: 12px;
     }
 }
