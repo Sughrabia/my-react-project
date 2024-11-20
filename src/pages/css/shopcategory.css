@@ -66,7 +66,7 @@
     text-transform: capitalize;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
-    min-width: 300px;
+    min-width: 250px;
     max-width: 100%;
     background-color: rgb(253, 253, 252);
     text-align: center;
@@ -84,4 +84,60 @@
     font-size: 1.25rem;
     font-weight: bold;
     color: #1a73e8;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+    .banner h1 {
+        font-size: 3rem; /* Scale down header size */
+    }
+
+    .banner p {
+        font-size: 1.25rem; /* Scale down paragraph size */
+    }
+
+    .banner button {
+        width: 180px; /* Adjust button size */
+        height: 45px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .banner {
+        flex-direction: column; /* Stack elements vertically */
+        gap: 15px;
+    }
+
+    .banner h1 {
+        font-size: 2.5rem; /* Further scale down header size */
+    }
+
+    .banner p {
+        font-size: 1rem; /* Further scale down paragraph size */
+    }
+
+    .banner-img {
+        height: 250px; /* Adjust image size for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .banner h1 {
+        font-size: 2rem; /* Adjust for small screens */
+    }
+
+    .banner p {
+        font-size: 0.9rem;
+    }
+
+    .banner button {
+        width: 150px; /* Reduce button size */
+        height: 40px;
+        font-size: 0.8rem;
+    }
+
+    .banner-img {
+        height: 200px; /* Adjust for small screens */
+    }
 }

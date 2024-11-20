@@ -50,3 +50,36 @@
     font-weight: bold;
     color: #1a73e8;
 }
+
+.view-more-button-container {
+    display: flex;
+    justify-content: center; /* Center the button horizontally */
+    margin-top: 10px; 
+    margin-bottom: 50px;
+  }
+  
+  /* Button styles */
+  .view-more-button {
+    padding: 15px 120px; /* Button size */
+    font-size: 16px; /* Text size */
+    font-weight: 500; /* Text weight */
+    text-transform: capitalize; /* Make text capitalize */
+    color: #ffffff; /* Button text color */
+    background-color: #f57305; /* Button background color */
+    border: none; /* Remove border */
+    border-radius: 50px; /* Rounded button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+  }
+  
+  /* Button hover effect */
+  .view-more-button:hover {
+    background-color: #e05b00; /* Darker shade on hover */
+    transform: scale(1.05); /* Slightly enlarge the button */
+  }
+  
+  /* Button focus styles */
+  .view-more-button:focus {
+    outline: 2px solid #f57305; /* Add a focus outline */
+    outline-offset: 2px; /* Space between the button and outline */
+  }
