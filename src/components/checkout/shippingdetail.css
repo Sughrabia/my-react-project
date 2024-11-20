@@ -75,58 +75,56 @@ h2 {
   width: 100%;
 }
 
-/* Responsive Styles */
 
-/* For tablets and small desktops */
 @media (max-width: 1024px) {
   .checkout-container {
       flex-direction: column;
-      align-items: stretch; /* Make each section full-width */
+      align-items: stretch; 
       gap: 20px;
   }
 
   .delivery-info .name-fields,
   .delivery-info .location-fields,
   .delivery-info .postal-fields {
-      grid-template-columns: 1fr; /* Single column for narrower screens */
+      grid-template-columns: 1fr; 
       gap: 10px;
   }
 
   .place-order-button {
-      width: 100%; /* Full width for buttons */
+      width: 100%; 
   }
 }
 
 /* For mobile devices */
 @media (max-width: 768px) {
   .delivery-info {
-      grid-template-columns: 1fr; /* Single column for all inputs */
+      grid-template-columns: 1fr;
   }
 
   .place-order-button {
-      font-size: 14px; /* Smaller text for smaller screens */
-      padding: 10px 20px; /* Adjust padding */
+      font-size: 14px; 
+      padding: 10px 20px; 
   }
 }
 
 /* For extra small screens */
 @media (max-width: 480px) {
   h2 {
-      font-size: 18px; /* Adjust heading size */
-      text-align: center; /* Center-align text for better readability */
+      font-size: 18px; 
+      text-align: center; 
   }
 
   .delivery-info input {
-      font-size: 14px; /* Smaller input text */
-      padding: 10px; /* Adjust padding */
+      font-size: 14px; 
+      padding: 10px; 
   }
 
   .payment-method label {
-      font-size: 14px; /* Smaller text for payment labels */
+      font-size: 14px; 
   }
 
   .place-order-button {
-      font-size: 14px; /* Smaller button text */
-      padding: 10px 15px; /* Adjust button padding */
+      font-size: 14px; 
+      padding: 10px 15px; 
   }
 }
