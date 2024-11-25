@@ -63,9 +63,7 @@ const ShopCategory = (props) => {
           ))}
         </div>
       )}
-      <p>
-        <span>Showing 1-12</span> out of products
-      </p>
+     
 
       <div className="shopcategory-products">
         {all_products
@@ -82,7 +80,7 @@ const ShopCategory = (props) => {
                 >
                   {normalizedImageUrl ? (
                     <img
-                      src={`https://res.cloudinary.com/dpcoepo9y/image/upload/${normalizedImageUrl}`}
+                      src={`${normalizedImageUrl}`}
                       alt={item.name}
                       className="shop-item-img"
                     />
