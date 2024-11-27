@@ -23,7 +23,7 @@ body {
   
   .slide {
     flex: 1 0 100%;
-    height: 550px;
+    /* height: 600px; */
     background: linear-gradient(to bottom, rgba(243, 138, 52, 0.5), rgba(255, 255, 255, 0.5));
     text-align: center;
     padding: 20px;
@@ -39,7 +39,7 @@ body {
   
   .slide img {
     width: 100%;
-    height: 500px;
+    height: 550px;
     border-radius: 8px;
   }
   

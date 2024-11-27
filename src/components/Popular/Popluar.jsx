@@ -45,27 +45,22 @@ const NewCollection = (props) => {
               const normalizedimageUrl = item.imageUrl?.replace(/\\/g, '/') || '';
 
               return (
-                <div key={item._id} className="product-item">
-                  <Link
-                    style={{ textDecoration: 'none' }}
-                    to={`/product/${item._id}`}
-                  >
+                <div key={item._id} >
+                  <div className="product-item">
+                 
                     {normalizedimageUrl ? (
-                      <img
-                        src={normalizedimageUrl}
-                        alt={item.name}
-                        className="item-img"
-                      />
+                      <img src={normalizedimageUrl} alt={item.name} className="item-img"/>
                     ) : (
                       <p>Image not available</p>
                     )}
+                  </div>
+                  
                     <div className="all_products-detail">
                       <h2 className="all_products-name">{item.name}</h2>
                       <p className="all_products-price new">
                         Price: ${item.price}
                       </p>
                     </div>
-                  </Link>
                 </div>
               );
             })

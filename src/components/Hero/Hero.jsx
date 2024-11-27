@@ -3,6 +3,7 @@ import "./Hero.css";
 import kidsCollection from "../assets/Kids collection.png";
 import womenCollection from "../assets/Women Collection.png";
 import menCollection from "../assets/Mens collection.png";
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   const slides = [
@@ -10,8 +11,8 @@ const Hero = () => {
       content: (
         <>
           <h1>Dress Dynamo</h1>
-          <button className="btn shop-now">Shop Now</button>
-          <button className="btn-cart">Cart</button>
+          <Link to="/NewCollection"><button className="btn shop-now">Shop Now</button></Link>
+          <Link to="/orderdetails"><button className="btn-cart">Cart</button></Link>
         </>
       ),
     },
@@ -44,7 +45,7 @@ const Hero = () => {
         <>
           <h2>Join Us Today!</h2>
           <p>Sign up to get the latest updates and offers.</p>
-          <button className="btn sign-up">Sign Up</button>
+          <Link to="/Loginsignup"><button className="btn sign-up">Sign Up</button></Link>
         </>
       ),
     },
