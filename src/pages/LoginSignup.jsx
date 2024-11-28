@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "./css/LoginSignup.css";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const LoginSignup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [otp, setOtp] = useState("");
+  const [isOtpSent, setIsOtpSent] = useState(false);
+  const [otpVerified, setOtpVerified] = useState(false);
+
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [otpError, setOtpError] = useState("");
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -19,7 +24,57 @@ const LoginSignup = () => {
     return password.length >= 6;
   };
 
-  const handleSubmit = async (event) => {
+  const handleSendOtp = async (event) => {
+    event.preventDefault();
+    setEmailError("");
+  
+    try {
+      const response = await fetch("http://localhost:5000/api/send-otp", { // Updated URL
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+  
+      if (response.ok) {
+        alert("OTP sent to your email. Please check and verify.");
+        setIsOtpSent(true);
+      } else {
+        const data = await response.json();
+        alert(`Error: ${data.message}`);
+      }
+    } catch (error) {
+      alert("Server error. Please try again later.");
+    }
+  };
+  
+  const handleVerifyOtp = async (event) => {
+    event.preventDefault();
+    setOtpError("");
+  
+    try {
+      const response = await fetch("http://localhost:5000/api/verify-otp", { // Updated URL
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, otp }),
+      });
+  
+      if (response.ok) {
+        alert("OTP verified successfully.");
+        setOtpVerified(true);
+      } else {
+        const data = await response.json();
+        setOtpError(data.message || "Invalid OTP.");
+      }
+    } catch (error) {
+      alert("Server error. Please try again later.");
+    }
+  };
+  
+  const handleRegister = async (event) => {
     event.preventDefault();
     setNameError("");
     setEmailError("");
@@ -45,7 +100,9 @@ const LoginSignup = () => {
       setPasswordError("Password must be at least 6 characters long");
       isValid = false;
     }
-    if (!isValid) {
+
+    if (!isValid || !otpVerified) {
+      alert("Please complete all fields and verify your OTP.");
       return;
     }
 
@@ -58,15 +115,18 @@ const LoginSignup = () => {
         body: JSON.stringify({ name, email, password }),
       });
 
-      const data = await response.json();
       if (response.ok) {
         alert(
-          "Registered successfully! Please check your email to verify your account."
+          "Registered successfully! You can now log in with your credentials."
         );
         setName("");
         setEmail("");
         setPassword("");
+        setOtp("");
+        setIsOtpSent(false);
+        setOtpVerified(false);
       } else {
+        const data = await response.json();
         alert(`Error: ${data.message}`);
       }
     } catch (error) {
@@ -78,8 +138,35 @@ const LoginSignup = () => {
     <div className="loginsignup-page">
       <div className="loginsignup-container">
         <h1>Sign Up</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="loginsignup-fields">
+        {!isOtpSent ? (
+          <form onSubmit={handleSendOtp}>
+            <input
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              className="loginsignup-content"
+              type="email"
+              placeholder="Email"
+              name="email"
+              autoComplete="new-email"
+            />
+            {emailError && <p className="errormessage">{emailError}</p>}
+            <button type="submit">Send OTP</button>
+          </form>
+        ) : !otpVerified ? (
+          <form onSubmit={handleVerifyOtp}>
+            <input
+              value={otp}
+              onChange={(event) => setOtp(event.target.value)}
+              className="loginsignup-content"
+              type="text"
+              placeholder="Enter OTP"
+              name="otp"
+            />
+            {otpError && <p className="errormessage">{otpError}</p>}
+            <button type="submit">Verify OTP</button>
+          </form>
+        ) : (
+          <form onSubmit={handleRegister}>
             <input
               value={name}
               onChange={(event) => setName(event.target.value)}
@@ -91,16 +178,6 @@ const LoginSignup = () => {
             />
             {nameError && <p className="errormessage">{nameError}</p>}
             <input
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              className="loginsignup-content"
-              type="email"
-              placeholder="Email"
-              name="email"
-              autoComplete="new-email"
-            />
-            {emailError && <p className="errormessage">{emailError}</p>}
-            <input
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               className="loginsignup-content"
@@ -110,9 +187,9 @@ const LoginSignup = () => {
               autoComplete="new-password"
             />
             {passwordError && <p className="errormessage">{passwordError}</p>}
-          </div>
-          <button type="submit">Continue</button>
-        </form>
+            <button type="submit">Register</button>
+          </form>
+        )}
         <p>
           Already have an account?{" "}
           <Link style={{ textDecoration: "none" }} to="/login">
