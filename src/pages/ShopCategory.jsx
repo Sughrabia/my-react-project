@@ -21,7 +21,7 @@ const ShopCategory = (props) => {
   }, [props.category]);
 
   useEffect(() => {
-    fetch("https://glamgrabbackend-dxah8u9g.b4a.run/product")
+    fetch("https://ordermanagementserver1-a6huju4d.b4a.run/product")
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
@@ -70,7 +70,7 @@ const ShopCategory = (props) => {
           .filter((item) => item.category === props.category)
           .map((item) => {
             // Ensure that the backend only returns the image ID and not the full URL
-            const normalizedImageUrl = item.imageUrl?.replace(/\\/g, "/") || "";
+            // const normalizedImageUrl = item.imageUrl?.replace(/\\/g, "/") || "";
 
             return (
               <div key={item._id} className="all_products-item">
@@ -78,15 +78,19 @@ const ShopCategory = (props) => {
                   style={{ textDecoration: "none" }}
                   to={`/product/${item._id}`}
                 >
-                  {normalizedImageUrl ? (
+                  (
                     <img
-                      src={`${normalizedImageUrl}`}
-                      alt={item.name}
-                      className="shop-item-img"
-                    />
+                        src={`https://ordermanagementserver1-a6huju4d.b4a.run/${item.imageUrl.replace(
+                          /\\/g,
+                          "/"
+                        )}`}
+                        alt={item.name}
+                        className="shop-item-img"
+                      />
+
                   ) : (
                     <p>No image available</p>
-                  )}
+                  )
                   <div className="all_products-detail">
                     <h2 className="all_products-name">{item.name}</h2>
                     <p className="all_products-price new">

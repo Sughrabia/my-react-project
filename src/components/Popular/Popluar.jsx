@@ -7,7 +7,7 @@ const NewCollection = (props) => {
 
   useEffect(() => {
     // Fetch products from the backend API
-    fetch('https://glamgrabbackend-dxah8u9g.b4a.run/product')
+    fetch('https://ordermanagementserver1-a6huju4d.b4a.run/product')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

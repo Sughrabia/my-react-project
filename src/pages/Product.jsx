@@ -10,7 +10,7 @@ const Product = () => {
     // Fetch products from the backend
     const fetchProducts = async () => {
       try {
-        const response = await fetch('https://glamgrabbackend-dxah8u9g.b4a.run/product'); // Adjust the URL as necessary
+        const response = await fetch('https://ordermanagementserver1-a6huju4d.b4a.run/product'); // Adjust the URL as necessary
         const data = await response.json();
         setProducts(data);
       } catch (error) {
