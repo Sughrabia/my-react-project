@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './cart.css';
 import { useCart } from '../../Context/CartContext';
 
-const Cart = ( onCartUpdate) => {
-  const { cartItems } = useCart(); 
-  const [fetchedCartItems, setFetchedCartItems] = useState([]); 
-  const [quantities, setQuantities] = useState({}); 
+const Cart = ({ onCartUpdate }) => {
+  const { cartItems } = useCart();
+  const [fetchedCartItems, setFetchedCartItems] = useState([]);
+  const [quantities, setQuantities] = useState({});
 
   useEffect(() => {
     const fetchCartData = async () => {
@@ -15,11 +15,12 @@ const Cart = ( onCartUpdate) => {
           throw new Error('Failed to fetch cart data');
         }
         const data = await response.json();
+        console.log(data);  // Log the fetched data to see the actual content
         setFetchedCartItems(data);
-        
+
         const initialQuantities = {};
-        data.forEach(item => {
-          initialQuantities[item._id] = item.quantity || 1; 
+        data.forEach((item) => {
+          initialQuantities[item._id] = item.quantity || 1;
         });
         setQuantities(initialQuantities);
       } catch (error) {
@@ -33,16 +34,16 @@ const Cart = ( onCartUpdate) => {
   const itemsToDisplay = fetchedCartItems.length > 0 ? fetchedCartItems : cartItems;
 
   const handleIncrease = (id) => {
-    setQuantities(prevQuantities => ({
+    setQuantities((prevQuantities) => ({
       ...prevQuantities,
-      [id]: prevQuantities[id] + 1
+      [id]: (prevQuantities[id] || 1) + 1,
     }));
   };
 
   const handleDecrease = (id) => {
-    setQuantities(prevQuantities => ({
+    setQuantities((prevQuantities) => ({
       ...prevQuantities,
-      [id]: prevQuantities[id] > 1 ? prevQuantities[id] - 1 : 1
+      [id]: Math.max((prevQuantities[id] || 1) - 1, 1),
     }));
   };
 
@@ -53,7 +54,7 @@ const Cart = ( onCartUpdate) => {
       });
 
       if (response.ok) {
-        setFetchedCartItems(itemsToDisplay.filter(item => item._id !== id));
+        setFetchedCartItems(itemsToDisplay.filter((item) => item._id !== id));
       } else {
         console.error('Error removing item from cart');
       }
@@ -62,8 +63,17 @@ const Cart = ( onCartUpdate) => {
     }
   };
 
-  const subtotal = itemsToDisplay.reduce((acc, item) => acc + item.price * (quantities[item._id] || 1), 0);
-  const shipping = 20; 
+  // Calculate subtotal and total
+  const subtotal = itemsToDisplay.reduce((acc, item) => {
+    const itemPrice = parseFloat(item.price);
+    if (isNaN(itemPrice)) {
+      console.warn(`Invalid price for item ${item._id}, setting to 0`);
+      return acc;
+    }
+    return acc + itemPrice * (quantities[item._id] || 1);
+  }, 0);
+  
+  const shipping = 20; // Flat rate shipping
   const total = subtotal + shipping;
 
   return (
@@ -74,9 +84,17 @@ const Cart = ( onCartUpdate) => {
           {itemsToDisplay.length === 0 ? (
             <p>Your cart is empty</p>
           ) : (
-            itemsToDisplay.map(item => (
+            itemsToDisplay.map((item) => (
               <div className="cart-item" key={item._id}>
-                <img src={`/${item.imageUrl}`} alt={item.name} className="cart-item-image" />
+                {item.imageUrl ? (
+                  <img
+                    src={`${item.imageUrl.replace(/\\/g, '/')}`} // Normalize image path
+                    alt={item.name}
+                    className="cart-item-image"
+                  />
+                ) : (
+                  <p>Image not available</p>
+                )}
                 <div className="cart-item-details">
                   <p>{item.name}</p>
                   <p>Quantity:</p>
@@ -84,7 +102,9 @@ const Cart = ( onCartUpdate) => {
                   <input type="number" value={quantities[item._id] || 1} min="1" readOnly />
                   <button onClick={() => handleIncrease(item._id)}>+</button>
 
-                  <p>Price: ${(item.price * (quantities[item._id] || 1)).toFixed(2)}</p>
+                  <p>
+                    Price: ${((parseFloat(item.price) || 0) * (quantities[item._id] || 1)).toFixed(2)}
+                  </p>
                   <button onClick={() => handleRemove(item._id)}>Remove</button>
                 </div>
               </div>
@@ -95,7 +115,7 @@ const Cart = ( onCartUpdate) => {
         <div className="cart-summary">
           <h2>Summary</h2>
           <p>Subtotal: ${subtotal.toFixed(2)}</p>
-          <p>Shipping: ${shipping}</p>
+          <p>Shipping: ${shipping.toFixed(2)}</p>
           <p>Total: USD ${total.toFixed(2)}</p>
         </div>
       </div>

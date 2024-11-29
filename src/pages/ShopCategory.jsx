@@ -21,7 +21,7 @@ const ShopCategory = (props) => {
   }, [props.category]);
 
   useEffect(() => {
-    fetch("https://ordermanagementserver1-a6huju4d.b4a.run/product")
+    fetch("https://glamgrabbackend-dxah8u9g.b4a.run/product")
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
@@ -43,7 +43,7 @@ const ShopCategory = (props) => {
               <div>
                 <h2>{banner.heading}</h2>
                 <p>{banner.text.join(", ")}</p>
-                <button>{banner.buttonLabel}</button>
+                <Link to='/NewCollection'><button>{banner.buttonLabel}</button></Link>
               </div>
               <div>
                 {banner.imageUrl ? (
@@ -63,14 +63,13 @@ const ShopCategory = (props) => {
           ))}
         </div>
       )}
-     
 
       <div className="shopcategory-products">
         {all_products
           .filter((item) => item.category === props.category)
           .map((item) => {
             // Ensure that the backend only returns the image ID and not the full URL
-            // const normalizedImageUrl = item.imageUrl?.replace(/\\/g, "/") || "";
+            const normalizedImageUrl = item.imageUrl?.replace(/\\/g, "/") || "";
 
             return (
               <div key={item._id} className="all_products-item">
@@ -78,21 +77,17 @@ const ShopCategory = (props) => {
                   style={{ textDecoration: "none" }}
                   to={`/product/${item._id}`}
                 >
-                  (
+                  {normalizedImageUrl ? (
                     <img
-                        src={`https://ordermanagementserver1-a6huju4d.b4a.run/${item.imageUrl.replace(
-                          /\\/g,
-                          "/"
-                        )}`}
-                        alt={item.name}
-                        className="shop-item-img"
-                      />
-
+                      src={normalizedImageUrl}
+                      alt={item.name}  /* Fixed the reference to item.name */
+                      className="main-image"
+                    />
                   ) : (
-                    <p>No image available</p>
-                  )
+                    <p>Image not available</p>
+                  )}
                   <div className="all_products-detail">
-                    <h2 className="all_products-name">{item.name}</h2>
+                    <h3 className="all_products-name">{item.name}</h3>
                     <p className="all_products-price new">
                       price ${item.price}
                     </p>

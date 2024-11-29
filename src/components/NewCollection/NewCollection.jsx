@@ -59,7 +59,7 @@ const NewCollection = () => {
                     <p>Image not available</p>
                   )}
                   <div className="all_products-detail">
-                    <h2 className="all_products-name">{item.name}</h2>
+                    <h3 className="all_products-name">{item.name}</h3>
                     <p className="all_products-price new">Price: ${item.price}</p>
                   </div>
                 </Link>

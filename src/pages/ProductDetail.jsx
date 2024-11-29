@@ -18,7 +18,7 @@ const ProductDetails = () => {
     };
 
     // API call to add product to cart
-    fetch('https://ordermanagementserver1-a6huju4d.b4a.run/cart/add', {
+    fetch('https://glamgrabbackend-dxah8u9g.b4a.run/cart/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
-        const response = await fetch(`https://ordermanagementserver1-a6huju4d.b4a.run/product/${productId}`);
+        const response = await fetch(`https://glamgrabbackend-dxah8u9g.b4a.run/product/${productId}`);
         if (!response.ok) {
           throw new Error('Failed to fetch product details');
         }

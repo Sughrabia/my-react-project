@@ -67,6 +67,14 @@
     font-weight: bold;
     color: #1a73e8;
 }
+.all_products-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Aligns items vertically (centered along the main axis) */
+    align-items: center;    
+    text-align: center;     
+}
+
 
 /* Media Queries for Responsiveness */
 
