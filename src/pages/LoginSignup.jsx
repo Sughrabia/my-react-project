@@ -29,7 +29,7 @@ const LoginSignup = () => {
     setEmailError("");
   
     try {
-      const response = await fetch("http://localhost:5000/api/send-otp", { // Updated URL
+      const response = await fetch("https://loginserver-2s23nyu0.b4a.run/api/send-otp", { // Updated URL
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -54,7 +54,7 @@ const LoginSignup = () => {
     setOtpError("");
   
     try {
-      const response = await fetch("http://localhost:5000/api/verify-otp", { // Updated URL
+      const response = await fetch("https://loginserver-2s23nyu0.b4a.run/api/verify-otp", { // Updated URL
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -107,7 +107,7 @@ const LoginSignup = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/login/api/signup", {
+      const response = await fetch("https://loginserver-2s23nyu0.b4a.run/login/api/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
