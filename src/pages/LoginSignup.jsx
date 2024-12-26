@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./css/LoginSignup.css";
 import { Link } from "react-router-dom";
 
+
 const LoginSignup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -9,7 +10,6 @@ const LoginSignup = () => {
   const [otp, setOtp] = useState("");
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [otpVerified, setOtpVerified] = useState(false);
-
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -29,7 +29,7 @@ const LoginSignup = () => {
     setEmailError("");
   
     try {
-      const response = await fetch("https://loginserver-2s23nyu0.b4a.run/api/send-otp", { // Updated URL
+      const response = await fetch("http://localhost:5000/login/send-otp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -52,9 +52,10 @@ const LoginSignup = () => {
   const handleVerifyOtp = async (event) => {
     event.preventDefault();
     setOtpError("");
+
   
     try {
-      const response = await fetch("https://loginserver-2s23nyu0.b4a.run/api/verify-otp", { // Updated URL
+      const response = await fetch("http://localhost:5000/api/verify-otp", { 
         method: "POST",
         headers: {
           "Content-Type": "application/json",

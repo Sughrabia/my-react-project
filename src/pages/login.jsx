@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import "./css/login.css";
 
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+ 
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -41,13 +43,14 @@ const Login = () => {
       return;
     }
 
+
     try {
       const response = await fetch(
         "https://loginserver-2s23nyu0.b4a.run/login/api/login",
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': "application/json",
           },
           body: JSON.stringify({ email, password }),
         }
