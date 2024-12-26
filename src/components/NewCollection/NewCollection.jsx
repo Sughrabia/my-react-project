@@ -9,7 +9,7 @@ const NewCollection = () => {
 
   useEffect(() => {
     // Fetch products from the backend API
-    fetch('https://glamgrabbackend-dxah8u9g.b4a.run/product')
+    fetch('https://ordermanagementserver1-a6huju4d.b4a.run/product')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -59,7 +59,7 @@ const NewCollection = () => {
                     <p>Image not available</p>
                   )}
                   <div className="all_products-detail">
-                    <h2 className="all_products-name">{item.name}</h2>
+                    <h3 className="all_products-name">{item.name}</h3>
                     <p className="all_products-price new">Price: ${item.price}</p>
                   </div>
                 </Link>

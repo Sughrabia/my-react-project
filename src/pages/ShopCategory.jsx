@@ -43,7 +43,7 @@ const ShopCategory = (props) => {
               <div>
                 <h2>{banner.heading}</h2>
                 <p>{banner.text.join(", ")}</p>
-                <button>{banner.buttonLabel}</button>
+                <Link to='/NewCollection'><button>{banner.buttonLabel}</button></Link>
               </div>
               <div>
                 {banner.imageUrl ? (
@@ -63,9 +63,6 @@ const ShopCategory = (props) => {
           ))}
         </div>
       )}
-      <p>
-        <span>Showing 1-12</span> out of products
-      </p>
 
       <div className="shopcategory-products">
         {all_products
@@ -82,15 +79,15 @@ const ShopCategory = (props) => {
                 >
                   {normalizedImageUrl ? (
                     <img
-                      src={`https://res.cloudinary.com/dpcoepo9y/image/upload/${normalizedImageUrl}`}
-                      alt={item.name}
-                      className="shop-item-img"
+                      src={normalizedImageUrl}
+                      alt={item.name}  /* Fixed the reference to item.name */
+                      className="main-image"
                     />
                   ) : (
-                    <p>No image available</p>
+                    <p>Image not available</p>
                   )}
                   <div className="all_products-detail">
-                    <h2 className="all_products-name">{item.name}</h2>
+                    <h3 className="all_products-name">{item.name}</h3>
                     <p className="all_products-price new">
                       price ${item.price}
                     </p>

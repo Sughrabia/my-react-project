@@ -15,10 +15,13 @@
 }
 
 .nav-logo p {
-    color: black;
-    font-size: 38px;
-    font-weight: 600;
+    font-family: 'Playfair Display', serif; /* Elegant serif font */
+    font-size: 42px; /* Adjust size for prominence */
+    font-weight: 600; /* Bold for emphasis */
+    color: black; /* Neutral color to keep it professional */
 }
+
+
 
 .nav-menu {
     display: flex;

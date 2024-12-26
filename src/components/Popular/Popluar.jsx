@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import './Popular.css';
 
 const NewCollection = (props) => {
@@ -8,7 +7,7 @@ const NewCollection = (props) => {
 
   useEffect(() => {
     // Fetch products from the backend API
-    fetch('https://glamgrabbackend-dxah8u9g.b4a.run/product')
+    fetch('https://ordermanagementserver1-a6huju4d.b4a.run/product')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -45,27 +44,22 @@ const NewCollection = (props) => {
               const normalizedimageUrl = item.imageUrl?.replace(/\\/g, '/') || '';
 
               return (
-                <div key={item._id} className="product-item">
-                  <Link
-                    style={{ textDecoration: 'none' }}
-                    to={`/product/${item._id}`}
-                  >
+                <div key={item._id} >
+                  <div className="product-item">
+                 
                     {normalizedimageUrl ? (
-                      <img
-                        src={normalizedimageUrl}
-                        alt={item.name}
-                        className="item-img"
-                      />
+                      <img src={normalizedimageUrl} alt={item.name} className="item-img"/>
                     ) : (
                       <p>Image not available</p>
                     )}
+                  </div>
+                  
                     <div className="all_products-detail">
-                      <h2 className="all_products-name">{item.name}</h2>
+                      <h3 className="all_products-name">{item.name}</h3>
                       <p className="all_products-price new">
                         Price: ${item.price}
                       </p>
                     </div>
-                  </Link>
                 </div>
               );
             })

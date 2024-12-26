@@ -58,13 +58,14 @@
   cursor: pointer;
   font-size: 16px;
   border-radius: 4px;
-  margin-top: 20px;
+  margin: 20px 0px 50px 300px;
   width: 100%; /* Full-width for better responsiveness */
   max-width: 300px;
 }
 
 h2 {
   color: #e98234;
+  font-size: 50px;
 }
 
 .paymentmethod {
