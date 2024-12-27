@@ -1,45 +1,14 @@
 import React, { useState } from 'react';
 import "./css/login.css";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const validatePassword = (password) => {
-    return password.length >= 6;
-  };
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setEmailError("");
-    setPasswordError("");
-
-    let isValid = true;
-
-    if (!email) {
-      setEmailError("Email is required");
-      isValid = false;
-    } else if (!validateEmail(email)) {
-      setEmailError("Invalid email format");
-      isValid = false;
-    }
-    if (!password) {
-      setPasswordError("Password is required");
-      isValid = false;
-    } else if (!validatePassword(password)) {
-      setPasswordError("Password must be at least 6 characters long");
-      isValid = false;
-    }
-    if (!isValid) {
-      return;
-    }
 
     try {
       const response = await fetch(
@@ -57,6 +26,7 @@ const Login = () => {
 
       if (response.ok) {
         alert("Login successful!");
+        navigate("/login");
         setEmail("");
         setPassword("");
       } else if (data.message === "User not verified") {
@@ -86,7 +56,6 @@ const Login = () => {
               name="email"
               autoComplete="new-email"
             />
-            {emailError && <p className="errormessage">{emailError}</p>}
             <input
               value={password}
               onChange={(event) => setPassword(event.target.value)}
@@ -96,7 +65,6 @@ const Login = () => {
               name="password"
               autoComplete="new-password"
             />
-            {passwordError && <p className="errormessage">{passwordError}</p>}
           </div>
           <button type="submit">Continue</button>
         </form>
