@@ -65,7 +65,7 @@ const LoginSignup = () => {
 
       if (response.ok) {
         setServerMessage("Signup successful! Please check your email for the OTP.");
-        const otpResponse = await fetch("http://localhost:5000/login/send-otp", {
+        const otpResponse = await fetch("https://loginserver-2s23nyu0.b4a.run/login/send-otp", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -100,7 +100,7 @@ const LoginSignup = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/login/verify-otp", {
+      const response = await fetch("https://loginserver-2s23nyu0.b4a.run/login/verify-otp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
