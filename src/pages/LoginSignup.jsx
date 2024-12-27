@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./css/LoginSignup.css";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginSignup = () => {
   const [name, setName] = useState("");
@@ -9,55 +8,67 @@ const LoginSignup = () => {
   const [password, setPassword] = useState("");
   const [otp, setOtp] = useState("");
   const [showOtpField, setShowOtpField] = useState(false);
-  const [nameError, setNameError] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [otpError, setOtpError] = useState("");
+  const [formErrors, setFormErrors] = useState({});
   const [serverMessage, setServerMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [resendTimer, setResendTimer] = useState(0);
   const navigate = useNavigate();
 
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const validatePassword = (password) => password.length >= 6;
 
+  const startResendTimer = () => {
+    setResendTimer(30); // 30-second timer
+    const interval = setInterval(() => {
+      setResendTimer((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  };
+
   const handleSignup = async (event) => {
     event.preventDefault();
-    setNameError("");
-    setEmailError("");
-    setPasswordError("");
+    setFormErrors({});
     setServerMessage("");
 
     let isValid = true;
+    const errors = {};
 
     if (!name) {
-      setNameError("Name is required");
+      errors.name = "Name is required";
       isValid = false;
     }
     if (!email) {
-      setEmailError("Email is required");
+      errors.email = "Email is required";
       isValid = false;
     } else if (!validateEmail(email)) {
-      setEmailError("Invalid email format");
+      errors.email = "Invalid email format";
       isValid = false;
     }
     if (!password) {
-      setPasswordError("Password is required");
+      errors.password = "Password is required";
       isValid = false;
     } else if (!validatePassword(password)) {
-      setPasswordError("Password must be at least 6 characters long");
+      errors.password = "Password must be at least 6 characters long";
       isValid = false;
     }
 
+    setFormErrors(errors);
+
     if (!isValid) {
-      alert("Please complete all fields.");
       return;
     }
 
+    setLoading(true);
+
     try {
-      const response = await fetch("https://loginserver-2s23nyu0.b4a.run/login/api/signup", {
+      const response = await fetch("http://localhost:5000/login/api/signup", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
       });
 
@@ -65,46 +76,44 @@ const LoginSignup = () => {
 
       if (response.ok) {
         setServerMessage("Signup successful! Please check your email for the OTP.");
+        startResendTimer();
         const otpResponse = await fetch("https://loginserver-2s23nyu0.b4a.run/login/send-otp", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email }),
         });
 
-        const otpData = await otpResponse.json();
-
         if (otpResponse.ok) {
           setShowOtpField(true);
-          setServerMessage("OTP sent to your email.");
         } else {
-          setServerMessage(`Error: ${otpData.message}`);
+          setServerMessage("Error sending OTP. Please try again.");
         }
       } else {
         setServerMessage(`Error: ${data.message}`);
       }
     } catch (error) {
       setServerMessage("Server error. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleOtpVerification = async (event) => {
     event.preventDefault();
-    setOtpError("");
+    setFormErrors({});
     setServerMessage("");
 
     if (!otp) {
-      setOtpError("OTP is required");
+      setFormErrors((prev) => ({ ...prev, otp: "OTP is required" }));
       return;
     }
+
+    setLoading(true);
 
     try {
       const response = await fetch("https://loginserver-2s23nyu0.b4a.run/login/verify-otp", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp }),
       });
 
@@ -112,12 +121,40 @@ const LoginSignup = () => {
 
       if (response.ok) {
         setServerMessage("Email verified successfully! Redirecting to login...");
-        setTimeout(() => navigate("/login"), 5000);
+        setTimeout(() => navigate("/login"), 3000);
       } else {
         setServerMessage(`Error: ${data.message}`);
       }
     } catch (error) {
-      alert("Server error. Please try again later.");
+      setServerMessage("Server error. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResendOtp = async () => {
+    if (resendTimer > 0) return;
+
+    try {
+      setLoading(true);
+      const response = await fetch("https://loginserver-2s23nyu0.b4a.run/login/send-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setServerMessage("OTP resent successfully.");
+        startResendTimer();
+      } else {
+        setServerMessage(`Error: ${data.message}`);
+      }
+    } catch (error) {
+      setServerMessage("Server error. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -135,9 +172,8 @@ const LoginSignup = () => {
                 type="text"
                 placeholder="Username"
                 name="name"
-                autoComplete="new-name"
               />
-              {nameError && <p className="errormessage">{nameError}</p>}
+              {formErrors.name && <p className="errormessage">{formErrors.name}</p>}
               <input
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
@@ -145,9 +181,8 @@ const LoginSignup = () => {
                 type="email"
                 placeholder="Email"
                 name="email"
-                autoComplete="new-email"
               />
-              {emailError && <p className="errormessage">{emailError}</p>}
+              {formErrors.email && <p className="errormessage">{formErrors.email}</p>}
               <input
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
@@ -155,11 +190,12 @@ const LoginSignup = () => {
                 type="password"
                 placeholder="Password"
                 name="password"
-                autoComplete="new-password"
               />
-              {passwordError && <p className="errormessage">{passwordError}</p>}
+              {formErrors.password && <p className="errormessage">{formErrors.password}</p>}
             </div>
-            <button type="submit">Sign Up</button>
+            <button type="submit" disabled={loading}>
+              {loading ? "Loading..." : "Sign Up"}
+            </button>
           </form>
         ) : (
           <form onSubmit={handleOtpVerification}>
@@ -171,11 +207,19 @@ const LoginSignup = () => {
                 type="text"
                 placeholder="Enter OTP"
                 name="otp"
-                autoComplete="off"
               />
-              {otpError && <p className="errormessage">{otpError}</p>}
+              {formErrors.otp && <p className="errormessage">{formErrors.otp}</p>}
             </div>
-            <button type="submit">Verify OTP</button>
+            <button type="submit" disabled={loading}>
+              {loading ? "Loading..." : "Verify OTP"}
+            </button>
+            <button
+              type="button"
+              onClick={handleResendOtp}
+              disabled={resendTimer > 0 || loading}
+            >
+              {resendTimer > 0 ? `Resend OTP in ${resendTimer}s` : "Resend OTP"}
+            </button>
           </form>
         )}
         {serverMessage && <p className="server-message">{serverMessage}</p>}
