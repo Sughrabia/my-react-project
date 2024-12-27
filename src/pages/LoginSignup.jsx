@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./css/LoginSignup.css";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 
 const LoginSignup = () => {
   const [name, setName] = useState("");
@@ -25,7 +25,7 @@ const LoginSignup = () => {
     setEmailError("");
     setPasswordError("");
     setServerMessage("");
-    
+
     let isValid = true;
 
     if (!name) {
@@ -47,8 +47,8 @@ const LoginSignup = () => {
       isValid = false;
     }
 
-    if (!isValid || !otpVerified) {
-      alert("Please complete all fields and verify your OTP.");
+    if (!isValid) {
+      alert("Please complete all fields.");
       return;
     }
 
@@ -61,22 +61,22 @@ const LoginSignup = () => {
         body: JSON.stringify({ name, email, password }),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         setServerMessage("Signup successful! Please check your email for the OTP.");
-        
-        // Send OTP after successful signup
         const otpResponse = await fetch("http://localhost:5000/login/send-otp", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email }), // Send only email for OTP
+          body: JSON.stringify({ email }),
         });
 
         const otpData = await otpResponse.json();
 
         if (otpResponse.ok) {
-          setShowOtpField(true); // Show OTP input field
+          setShowOtpField(true);
           setServerMessage("OTP sent to your email.");
         } else {
           setServerMessage(`Error: ${otpData.message}`);
@@ -105,7 +105,7 @@ const LoginSignup = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, otp }), // Send email and OTP for verification
+        body: JSON.stringify({ email, otp }),
       });
 
       const data = await response.json();
