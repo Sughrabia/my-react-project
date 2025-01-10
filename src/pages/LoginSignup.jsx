@@ -66,7 +66,7 @@ const LoginSignup = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("https://loginserver-2s23nyu0.b4a.run/login/api/signup", {
+      const response = await fetch("https://glamgrabbackend-dxah8u9g.b4a.run/login/api/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
@@ -77,7 +77,7 @@ const LoginSignup = () => {
       if (response.ok) {
         setServerMessage("Signup successful! Please check your email for the OTP.");
         startResendTimer();
-        const otpResponse = await fetch("https://loginserver-2s23nyu0.b4a.run/login/send-otp", {
+        const otpResponse = await fetch("https://glamgrabbackend-dxah8u9g.b4a.run/login/send-otp", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email }),
@@ -111,7 +111,7 @@ const LoginSignup = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("https://loginserver-2s23nyu0.b4a.run/login/verify-otp", {
+      const response = await fetch("https://glamgrabbackend-dxah8u9g.b4a.run/login/verify-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp }),
@@ -137,7 +137,7 @@ const LoginSignup = () => {
 
     try {
       setLoading(true);
-      const response = await fetch("https://loginserver-2s23nyu0.b4a.run/login/send-otp", {
+      const response = await fetch("https://glamgrabbackend-dxah8u9g.b4a.run/login/send-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
