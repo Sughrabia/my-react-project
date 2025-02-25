@@ -18,7 +18,7 @@ const LoginSignup = () => {
   const validatePassword = (password) => password.length >= 6;
 
   const startResendTimer = () => {
-    setResendTimer(30); // 30-second timer
+    setResendTimer(60); // 30-second timer
     const interval = setInterval(() => {
       setResendTimer((prev) => {
         if (prev <= 1) {
