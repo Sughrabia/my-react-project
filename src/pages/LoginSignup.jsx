@@ -17,13 +17,10 @@ const LoginSignup = () => {
       if (!response || !response.message) {
         throw new Error("Unexpected response from server");
       }
-
-      alert(response.message); // Show success message
-      // Navigate to the login screen after successful registration
+      alert(response.message);
       navigate("/login");
     } catch (err) {
       console.error("Error:", err);
-      // If err.response exists (like in Axios), show its message, otherwise show a generic error
       if (err.response && err.response.data) {
         alert(err.response.data.message);
       } else {

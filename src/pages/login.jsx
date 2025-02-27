@@ -12,7 +12,7 @@ const Login = () => {
 
     try {
       const response = await fetch(
-        "https://loginserver-2s23nyu0.b4a.run/login/api/login",
+        "http://localhost:5000/api/login",
         {
           method: "POST",
           headers: {
@@ -26,13 +26,13 @@ const Login = () => {
 
       if (response.ok) {
         alert("Login successful!");
-        navigate("/login");
+        navigate("/");
         setEmail("");
         setPassword("");
-      } else if (data.message === "User not verified") {
-        alert(
-          "Your account is not verified. Please check your email for the verification link."
-        );
+      // } else if (data.message === "User not verified") {
+      //   alert(
+      //     "Your account is not verified. Please check your email for the verification link."
+      //   );
       } else {
         alert(`Error: ${data.message}`);
       }
