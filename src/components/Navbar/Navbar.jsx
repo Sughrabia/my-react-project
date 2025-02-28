@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Navbar.css'
 import cartIcon from '../assets/cart.png';
-import logo from '../assets/0a4b4043f420749c14b94ed5a1e684c1-removebg-preview (1).png';
+import logo from '../assets/WhatsApp Image 2025-02-28 at 7.04.19 AM.jpeg';
 import { Link } from 'react-router-dom';
 
 
@@ -13,7 +13,7 @@ const Navbar = () => {
     <div className='Navbar'>
       <div className='nav-logo'>
         < img src={logo} alt='img' className='logo'/>
-        <p>Dressdynamo</p>
+        <p>GlamGrab</p>
       </div>
         <ul className='nav-menu '>
             <li onClick={()=>{setMenu("shop")}}> <Link style={{textDecoration:'none'}} to='/'>Shop</Link> {menu==="shop"?<hr/>:<></>}</li>

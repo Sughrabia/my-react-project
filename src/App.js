@@ -18,12 +18,12 @@ import NewCollection from './components/NewCollection/NewCollection';
 import { CartProvider } from './Context/CartContext';
 import Checkoutpage from './components/checkout/checkoutpage';
 import Verification from './pages/verification';
-import {AuthProvider} from './Context/AuthoContext';
+// import {AuthProvider} from './Context/AuthoContext';
 
 function App() {
   return (
     <div>
-      <AuthProvider>
+      {/* <AuthProvider> */}
       <CartProvider>
       <BrowserRouter>
         <Navbar />
@@ -47,7 +47,7 @@ function App() {
         <Footer />
       </BrowserRouter>
       </CartProvider>
-      </AuthProvider>
+      {/* </AuthProvider> */}
     </div>
   );
 }
